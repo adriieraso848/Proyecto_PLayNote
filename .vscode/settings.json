@@ -1,0 +1,8 @@
+{
+  "liveServer.settings.watchFiles": [
+    "*/.html",
+    "*/.css",
+    "src/*.css"
+  ],
+  "liveServer.settings.fullReload": true
+} 
