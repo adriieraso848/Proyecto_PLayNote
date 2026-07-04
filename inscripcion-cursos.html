@@ -20,15 +20,15 @@
             <nav class="bg-[#16233B] flex justify-between items-center px-8 py-4">
 
                 <div class="flex items-center gap-5">
-                    <span class="text-white text-3xl">🎵</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#573ddb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-music-icon lucide-music"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
                     <h1 class="text-white text-3xl font-bold">PlayNoteMusic</h1>
                 </div>
                 
 
-                <div class="relative max-w-sm ml-auto relative w-full max-w-md ">
+                <div class="relative max-w-sm ml-auto relative w-85 max-w-md ">
                     <!-- Icono de lupa -->
                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
 
                     </span>
 
@@ -40,8 +40,23 @@
                     >
                 </div>
 
-                <div class="flex text-white ">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-icon lucide-user-round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+                <!-- Perfil Usuario -->
+                <div class="relative inline-block group">
+    
+                    <!-- Ícono de perfil -->
+                    <button class="p-2 rounded-full hover:bg-sky-700 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-icon lucide-user-round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+                    </button>
+
+                    <!-- Menú desplegable -->
+                    <div class="absolute right-0 mt-0 w-48 bg-white rounded-lg shadow-lg border border-gray-200 hidden group-hover:block">
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Mi perfil</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Progreso</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Mis cursos</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Configuración</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Cerrar sesión</a>
+                    </div>
+
                 </div>
 
             </nav>
@@ -50,7 +65,8 @@
             <div class="px-8 mt-6">
 
                 <button class="bg-[#16233B] text-white px-5 py-2 rounded-full flex items-center gap-2 hover:bg-slate-600">
-                    ⬅ Atrás
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                    Atrás
                 </button>
 
             </div>
@@ -82,7 +98,7 @@
                 <button class="bg-blue-600 text-white text-2xl rounded-lg px-20 py-5 hover:bg-[#16233B]">
                     🧭 Explorar más cursos
                 </button>
-
+                
             </div>
 
         </div>

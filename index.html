@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PlayNote — Desbloquea tu potencial musical</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['"Fraunces"', 'serif'],
+          sans: ['"Work Sans"', 'sans-serif'],
+          mono: ['"IBM Plex Mono"', 'monospace'],
+        },
+        colors: {
+            ink: { DEFAULT: '#0F172A', 800: '#1E293B' },      // Azul oscuro
+            brass: { DEFAULT: '#3B82F6', 400: '#60A5FA', 600: '#2563EB' }, // Azul principal
+            ivory: '#F8FAFC',                                // Fondo claro
+            ember: { DEFAULT: '#0EA5E9', 600: '#0284C7' },   // Azul celeste
+            sage: '#38BDF8',                                // Azul claro
+            charcoal: '#334155',                            // Gris azulado
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { font-family: 'Work Sans', sans-serif; background:#F8FAFC;; }
+
+  .grain {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+
+  .hero-bg {
+    background-image:
+      linear-gradient(180deg, rgba(34,25,18,0.55) 0%, rgba(34,25,18,0.88) 100%),
+      url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1600&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .staff {
+    height: 42px;
+  }
+  .staff line{
+    stroke:#3B82F6;
+}
+
+.staff circle{
+    fill:#3B82F6;
+}
+
+  @media (prefers-reduced-motion: no-preference) {
+    .rise { animation: rise 0.8s cubic-bezier(.22,1,.36,1) both; }
+    .rise-1 { animation-delay: .05s; }
+    .rise-2 { animation-delay: .18s; }
+    .rise-3 { animation-delay: .32s; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
+
+  .card-img { transition: transform .6s cubic-bezier(.22,1,.36,1); }
+  .card:hover .card-img { transform: scale(1.06); }
+  .card:hover .card-title{ color:#60A5FA;}
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid #C69C4E;
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body class="text-charcoal">
+
+  <!-- Header -->
+  <header class="bg-ink grain">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
+      <!-- Logo -->
+      <div class="flex items-center gap-2.5 text-ivory">
+        <svg class="w-6 h-6 text-brass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+          <path d="M9 18V5l12-2v13" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="6" cy="18" r="3" stroke-linecap="round"/>
+          <circle cx="18" cy="16" r="3" stroke-linecap="round"/>
+        </svg>
+        <span class="font-display text-xl font-semibold tracking-wide">PlayNote</span>
+      </div>
+
+      <!-- Links -->
+      <ul class="hidden md:flex items-center gap-9 font-mono text-[11px] font-medium text-ivory/70 tracking-[0.14em]">
+        <li><a href="#" class="relative pb-1 hover:text-brass transition after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-0 after:bg-brass hover:after:w-full after:transition-all">CURSOS</a></li>
+        <li><a href="#" class="relative pb-1 hover:text-brass transition after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-0 after:bg-brass hover:after:w-full after:transition-all">EXPLORAR</a></li>
+        <li><a href="#" class="relative pb-1 hover:text-brass transition after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-0 after:bg-brass hover:after:w-full after:transition-all">COMUNIDAD</a></li>
+        <li><a href="#" class="relative pb-1 hover:text-brass transition after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-0 after:bg-brass hover:after:w-full after:transition-all">PROGRESO</a></li>
+      </ul>
+
+      <!-- Search + user -->
+      <div class="flex items-center gap-4">
+        <button class="flex items-center gap-2 border border-brass/50 hover:border-brass hover:bg-brass/10 transition text-ivory/85 text-sm px-4 py-2 rounded-full">
+          Buscar
+          <svg class="w-4 h-4 text-brass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </button>
+        <button class="flex items-center justify-center w-9 h-9 rounded-full border border-ivory/25 text-ivory/85 hover:border-brass hover:text-brass transition" aria-label="Perfil de usuario">
+          <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4 3.6-6 8-6s8 2 8 6" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero-bg text-ivory">
+    <div class="max-w-7xl mx-auto px-6 py-28 md:py-36">
+      <p class="rise rise-1 font-mono text-[11px] tracking-[0.22em] text-brass mb-5">APRENDE A TU RITMO</p>
+      <h1 class="rise rise-2 font-display text-5xl md:text-7xl font-semibold leading-[1.05] max-w-2xl">
+        Desbloquea Tu Potencial Musical
+      </h1>
+
+      <!-- staff line signature -->
+      <svg class="staff w-64 rise rise-2 mt-6 mb-2" viewBox="0 0 260 42" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="6" x2="260" y2="6"/>
+        <line x1="0" y1="16" x2="260" y2="16"/>
+        <line x1="0" y1="26" x2="260" y2="26"/>
+        <line x1="0" y1="36" x2="260" y2="36"/>
+        <circle cx="24" cy="16" r="4.5"/>
+        <circle cx="92" cy="26" r="4.5"/>
+        <circle cx="160" cy="6" r="4.5"/>
+        <circle cx="228" cy="36" r="4.5"/>
+      </svg>
+
+      <p class="rise rise-2 text-ivory/75 text-base md:text-lg max-w-lg mt-3">
+        Aprende cualquier instrumento, en cualquier lugar, en cualquier momento
+      </p>
+      <button class="rise rise-3 mt-9 bg-ember hover:bg-ember-600 transition text-ivory font-semibold px-8 py-3.5 rounded-full shadow-lg shadow-ember/20">
+        Inicio
+      </button>
+    </div>
+  </section>
+
+  <!-- Cursos -->
+  <section class="bg-ivory">
+    <div class="max-w-7xl mx-auto px-6 py-20">
+
+      <div class="flex items-end justify-between mb-10 flex-wrap gap-4">
+        <div>
+          <p class="font-mono text-[11px] tracking-[0.22em] text-ember mb-2">CATÁLOGO</p>
+          <h2 class="font-display text-3xl md:text-4xl font-semibold text-ink">Descubre tu curso ideal</h2>
+        </div>
+        <a href="#" class="hidden md:inline-flex items-center gap-1.5 text-sm font-medium text-ink/70 hover:text-ember transition">
+          Ver todos los cursos
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+
+        <!-- Card 1 -->
+        <a href="#" class="card group block">
+          <div class="relative rounded-2xl overflow-hidden h-64 border border-ink/10 shadow-sm">
+            <img src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?q=80&w=800&auto=format&fit=crop"
+                 alt="Guitarra acústica" class="card-img absolute inset-0 w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent"></div>
+            <span class="absolute top-4 right-4 flex items-center gap-1.5 bg-ink/70 backdrop-blur text-ivory text-[10px] font-mono tracking-wider px-2.5 py-1 rounded-full">
+              <span class="w-1.5 h-1.5 rounded-full bg-sage"></span>PRINCIPIANTE
+            </span>
+            <span class="card-title absolute bottom-5 left-5 right-5 text-ivory font-display text-2xl font-semibold leading-snug transition-colors">
+              Fundamentos de la guitarra
+            </span>
+          </div>
+        </a>
+
+        <!-- Card 2 -->
+        <a href="#" class="card group block">
+          <div class="relative rounded-2xl overflow-hidden h-64 border border-ink/10 shadow-sm">
+            <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?q=80&w=800&auto=format&fit=crop"
+                 alt="Piano de cola" class="card-img absolute inset-0 w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent"></div>
+            <span class="absolute top-4 right-4 flex items-center gap-1.5 bg-ink/70 backdrop-blur text-ivory text-[10px] font-mono tracking-wider px-2.5 py-1 rounded-full">
+              <span class="w-1.5 h-1.5 rounded-full bg-brass"></span>INTERMEDIO
+            </span>
+            <span class="card-title absolute bottom-5 left-5 right-5 text-ivory font-display text-2xl font-semibold leading-snug transition-colors">
+              Dominio del piano
+            </span>
+          </div>
+        </a>
+
+        <!-- Card 3 -->
+        <a href="#" class="card group block">
+          <div class="relative rounded-2xl overflow-hidden h-64 border border-ink/10 shadow-sm">
+            <img src="https://images.unsplash.com/photo-1465821185615-20b3c2fbf41b?q=80&w=800&auto=format&fit=crop"
+                 alt="Violín" class="card-img absolute inset-0 w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent"></div>
+            <span class="absolute top-4 right-4 flex items-center gap-1.5 bg-ink/70 backdrop-blur text-ivory text-[10px] font-mono tracking-wider px-2.5 py-1 rounded-full">
+              <span class="w-1.5 h-1.5 rounded-full bg-ember"></span>AVANZADO
+            </span>
+            <span class="card-title absolute bottom-5 left-5 right-5 text-ivory font-display text-2xl font-semibold leading-snug transition-colors">
+              Concierto de violín
+            </span>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- staff divider -->
+      <svg class="staff w-full mt-16 mb-8 opacity-80" viewBox="0 0 1000 42" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="6" x2="1000" y2="6"/>
+        <line x1="0" y1="16" x2="1000" y2="16"/>
+        <line x1="0" y1="26" x2="1000" y2="26"/>
+        <line x1="0" y1="36" x2="1000" y2="36"/>
+        <circle cx="120" cy="16" r="4.5"/>
+        <circle cx="380" cy="36" r="4.5"/>
+        <circle cx="640" cy="6" r="4.5"/>
+        <circle cx="880" cy="26" r="4.5"/>
+      </svg>
+
+      <!-- Features -->
+      <div class="flex flex-wrap items-center justify-center gap-x-14 gap-y-8">
+
+        <div class="flex items-center gap-3">
+          <span class="flex items-center justify-center w-11 h-11 rounded-full border border-ink/15 text-ink group-hover:border-brass transition">
+            <svg class="w-4.5 h-4.5 text-ember" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="2" y="6" width="14" height="12" rx="2"/>
+              <path d="M16 10l6-3v10l-6-3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="text-ink/85 font-medium text-sm">Lecciones en video HD</span>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span class="flex items-center justify-center w-11 h-11 rounded-full border border-ink/15">
+            <svg class="w-4.5 h-4.5 text-ember" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M4 5c3-1.5 6-1.5 8 0v14c-2-1.5-5-1.5-8 0V5Z" stroke-linejoin="round"/>
+              <path d="M20 5c-3-1.5-6-1.5-8 0v14c2-1.5 5-1.5 8 0V5Z" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="text-ink/85 font-medium text-sm">Material descargable</span>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span class="flex items-center justify-center w-11 h-11 rounded-full border border-ink/15">
+            <svg class="w-4.5 h-4.5 text-ember" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M6 3h12v18l-6-4-6 4V3Z" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="text-ink/85 font-medium text-sm">Certificados</span>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span class="flex items-center justify-center w-11 h-11 rounded-full border border-ink/15">
+            <svg class="w-4.5 h-4.5 text-ember" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M4 5c3-1.5 6-1.5 8 0v14c-2-1.5-5-1.5-8 0V5Z" stroke-linejoin="round"/>
+              <path d="M20 5c-3-1.5-6-1.5-8 0v14c2-1.5 5-1.5 8 0V5Z" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="text-ink/85 font-medium text-sm">Evaluaciones</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-ink text-ivory/50 text-center text-xs font-mono tracking-wider py-6">
+    © 2026 PLAYNOTE — HECHO PARA QUIENES AMAN LA MÚSICA
+  </footer>
+
+</body>
+</html>
