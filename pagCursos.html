@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PlayNote — Catálogo de cursos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          void: "#080f1c", navy: "#0e1b2e", "navy-2": "#152947",
+          "brand-bg": "#f4f7fb", "brand-card": "#101f36",
+          "brand-blue": "#3d8bff", "brand-cyan": "#5cd3e8",
+          "brand-amber": "#f0a93b", "brand-ink": "#0e1b2e",
+        },
+        fontFamily: {
+          sans: ["Inter", "sans-serif"],
+          serif: ["Fraunces", "serif"],
+          mono: ["JetBrains Mono", "monospace"],
+        },
+        keyframes: {
+          bob: { "0%,100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(4px)" } },
+          livePulse: { "0%,100%": { opacity: 1, transform: "scale(1)" }, "50%": { opacity: 0.35, transform: "scale(0.7)" } },
+        },
+        animation: { bob: "bob 1.6s ease-in-out infinite", "live-pulse": "livePulse 1.8s ease-in-out infinite" },
+      },
+    },
+  };
+</script>
+</head>
+<body class="min-h-screen bg-brand-bg font-sans text-brand-ink">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-30 flex h-[74px] items-center justify-between bg-void px-5 text-white md:px-11">
+    <div class="flex items-center gap-[11px]">
+      <div class="flex h-7 w-7 items-center justify-center rounded-md bg-gradient-to-br from-brand-blue to-brand-cyan text-void">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      </div>
+      <span class="font-serif text-[1.32rem] font-semibold tracking-tight">PlayNote</span>
+    </div>
+    <nav class="hidden gap-[30px] md:flex">
+      <a href="#" class="text-[0.76rem] font-semibold uppercase tracking-[1.3px] text-white/70 transition-colors hover:text-brand-cyan">Cursos</a>
+      <a href="#" class="text-[0.76rem] font-semibold uppercase tracking-[1.3px] text-white/70 transition-colors hover:text-brand-cyan">Explorar</a>
+      <a href="#" class="text-[0.76rem] font-semibold uppercase tracking-[1.3px] text-white/70 transition-colors hover:text-brand-cyan">Comunidad</a>
+      <a href="#" class="text-[0.76rem] font-semibold uppercase tracking-[1.3px] text-white/70 transition-colors hover:text-brand-cyan">Progreso</a>
+    </nav>
+    <div class="flex items-center gap-3.5">
+      <div class="flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 focus-within:border-brand-cyan">
+        <svg class="h-3.5 w-3.5 text-white/55" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="search" placeholder="Buscar curso…" class="w-[110px] bg-transparent text-[0.82rem] text-white outline-none placeholder:text-white/40 md:w-[170px]" />
+      </div>
+      <button class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue to-brand-cyan text-[0.8rem] font-bold text-void">PN</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden px-5 pb-[130px] pt-[70px] text-white md:px-11 md:pt-[88px]"
+    style="background:linear-gradient(160deg,#080f1c 0%,#0e1b2e 55%,#152947 100%)">
+    <div class="absolute inset-0" style="background:radial-gradient(ellipse 700px 500px at 82% 8%,rgba(61,139,255,.3),transparent 60%),radial-gradient(ellipse 500px 400px at 10% 90%,rgba(92,211,232,.16),transparent 60%)"></div>
+    <div class="absolute inset-0 opacity-[0.05]" style="background-image:radial-gradient(rgba(255,255,255,.5) 1px,transparent 1px);background-size:28px 28px"></div>
+    <div class="relative z-[2] max-w-[620px]">
+      <div class="mb-5 flex items-center gap-2.5 font-mono text-[0.7rem] uppercase tracking-[2.6px] text-brand-cyan">
+        <span class="h-px w-[26px] bg-brand-cyan"></span>Aprende a tu ritmo
+      </div>
+      <h1 class="mb-[22px] font-serif text-[2.3rem] font-semibold leading-[1.08] tracking-tight md:text-[3.3rem]">
+        Desbloquea tu <em class="italic text-brand-cyan">potencial musical</em>
+      </h1>
+      <p class="mb-[34px] max-w-[440px] text-[1.02rem] leading-relaxed text-white/70">
+        Nueve instrumentos, decenas de instructores y un progreso que se guarda solo. Empieza cuando quieras, donde quieras.
+      </p>
+      <div class="flex flex-wrap items-center gap-5">
+        <button
+          onclick="document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' })"
+          class="rounded-full bg-gradient-to-r from-blue-500 to-blue-700 px-8 py-[15px] text-[0.9rem] font-bold text-white shadow-[0_12px_28px_rgba(61,139,255,.35)] transition-all hover:-translate-y-0.5">
+            Explorar catálogo
+        </button>
+        <div class="flex items-center gap-2 text-[0.78rem] text-white/50">
+          <svg class="h-3.5 w-3.5 animate-bob" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Ver cursos
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION HEAD -->
+  <div class="relative z-[5] mx-auto -mt-10 max-w-[1240px] px-5 pb-[30px] md:-mt-16 md:px-11">
+    <div class="flex w-full flex-wrap items-center justify-between gap-[18px] rounded-[20px] bg-white p-5 shadow-[0_20px_50px_rgba(14,27,46,.14)] md:px-[30px] md:py-[26px]">
+      <div>
+        <p class="mb-1.5 font-mono text-[0.68rem] uppercase tracking-[2.2px] text-brand-blue">Catálogo</p>
+        <h2 class="font-serif text-[1.6rem] font-semibold">Descubre tu curso ideal</h2>
+      </div>
+      <div class="flex items-center gap-[18px]">
+        <div id="filters" class="flex gap-1.5 rounded-xl bg-brand-bg p-1.5">
+          <button data-filter="all" class="filter-btn rounded-lg bg-navy px-[18px] py-2.5 text-[0.85rem] font-semibold text-white">Todos los cursos</button>
+          <button data-filter="mine" class="filter-btn rounded-lg px-[18px] py-2.5 text-[0.85rem] font-semibold text-brand-ink/50 hover:bg-brand-blue/10">Mis cursos</button>
+          <button data-filter="popular" class="filter-btn rounded-lg px-[18px] py-2.5 text-[0.85rem] font-semibold text-brand-ink/50 hover:bg-brand-blue/10">Populares</button>
+        </div>
+        <div class="hidden items-center gap-2 rounded-full bg-navy px-[18px] py-2.5 text-[0.8rem] font-semibold text-white sm:flex">
+          <span class="h-[7px] w-[7px] rounded-full bg-brand-cyan animate-live-pulse"></span>En vivo
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALERT -->
+  <div id="alert" class="mx-auto hidden max-w-[1240px] px-5 md:px-11">
+    <div class="mb-[-6px] mt-[22px] flex items-start gap-3.5 rounded-[14px] border border-[#D65B5B] border-l-4 border-l-[#C24545] bg-[#FDEDED] px-5 py-4 text-[0.9rem] text-[#93302F]">
+      <svg class="mt-px h-5 w-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21.7 18-8-14a2 2 0 0 0-3.5 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3Z"/><path d="M12 9v4M12 17h.01"/></svg>
+      <div><strong class="mb-0.5 block font-bold">No pudimos cargar el catálogo</strong>La información recibida no tiene un formato válido. Intenta cargar la página de nuevo.</div>
+      <button onclick="setError(false)" class="ml-auto whitespace-nowrap rounded-md bg-[#93302F] px-3.5 py-[7px] text-[0.8rem] font-semibold text-white">Reintentar</button>
+    </div>
+  </div>
+
+  <!-- GRID -->
+  <section id="catalogo" class="grid-section" class="mx-auto max-w-[1240px] px-5 pb-[90px] pt-[38px] md:px-11">
+    <div id="grid" class="grid gap-[26px]" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))"></div>
+    <div id="empty" class="hidden flex-col items-center gap-4 rounded-[20px] bg-white px-5 py-20 text-center">
+      <svg class="h-[60px] w-[60px] text-brand-blue" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+      <h3 id="empty-title" class="font-serif text-[1.35rem] font-semibold"></h3>
+      <p id="empty-text" class="max-w-[340px] text-[0.92rem] leading-relaxed text-brand-ink/55"></p>
+      <button onclick="resetFilters()" class="mt-1.5 rounded-full px-8 py-[15px] text-[0.9rem] font-bold text-white shadow-[0_12px_28px_rgba(61,139,255,.35)] transition-all hover:-translate-y-0.5" style="background:linear-gradient(120deg,#3d8bff,#2e6fe0)">Explorar cursos</button>
+    </div>
+  </section>
+
+  <!-- DEV TOGGLE -->
+  <div class="mx-auto flex max-w-[1240px] gap-2.5 px-5 pb-10 md:px-11">
+    <button onclick="setError()" class="rounded-lg border border-dashed border-brand-ink/25 px-3 py-1.5 font-mono text-[0.75rem] text-brand-ink/50 hover:border-brand-blue hover:text-brand-ink">Simular / ocultar error</button>
+  </div>
+
+<script>
+  const ICON = {
+    music:'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+  };
+  const COURSES = [
+    {title:"Violín: Técnica y Expresión",instructor:"Laura Martínez",hours:11,lessons:30,level:"Intermedio",popular:true,mine:false},
+    {title:"Guitarra: Técnica y Expresión",instructor:"Alejandro Sans",hours:18,lessons:40,level:"Principiante",popular:true,mine:true},
+    {title:"Piano: Técnica y Expresión",instructor:"Miguel Arango",hours:15,lessons:35,level:"Intermedio",popular:true,mine:false},
+    {title:"Batería: Ritmo desde Cero",instructor:"Carlos Peña",hours:13,lessons:28,level:"Principiante",popular:false,mine:false},
+    {title:"Canto: Técnica Vocal Moderna",instructor:"Sofía Reyes",hours:9,lessons:22,level:"Intermedio",popular:true,mine:true},
+    {title:"Saxofón: Jazz y Blues",instructor:"Daniel Ortiz",hours:16,lessons:32,level:"Avanzado",popular:false,mine:false},
+    {title:"Flauta Traversa: Sonido y Respiración",instructor:"Camila Rojas",hours:10,lessons:24,level:"Principiante",popular:false,mine:false},
+    {title:"Bajo Eléctrico: Groove Esencial",instructor:"Andrés Gómez",hours:14,lessons:29,level:"Intermedio",popular:false,mine:false},
+    {title:"Ukelele: Acordes y Canciones",instructor:"Valentina Cruz",hours:7,lessons:18,level:"Principiante",popular:true,mine:false},
+  ];
+  const GLOWS = [
+    "radial-gradient(circle at 25% 15%,rgba(61,139,255,.4),transparent 55%),linear-gradient(165deg,#173456,#0B1A2C)",
+    "radial-gradient(circle at 75% 12%,rgba(92,211,232,.32),transparent 55%),linear-gradient(165deg,#123049,#081625)",
+    "radial-gradient(circle at 50% 8%,rgba(61,139,255,.35),transparent 55%),linear-gradient(165deg,#1B3A5F,#0A1B2E)",
+    "radial-gradient(circle at 30% 20%,rgba(240,169,59,.22),transparent 55%),linear-gradient(165deg,#173456,#0B1A2C)",
+    "radial-gradient(circle at 70% 15%,rgba(92,211,232,.3),transparent 55%),linear-gradient(165deg,#123049,#081625)",
+    "radial-gradient(circle at 40% 10%,rgba(61,139,255,.3),transparent 55%),linear-gradient(165deg,#1B3A5F,#0A1B2E)",
+    "radial-gradient(circle at 60% 18%,rgba(92,211,232,.28),transparent 55%),linear-gradient(165deg,#173456,#0B1A2C)",
+    "radial-gradient(circle at 35% 12%,rgba(240,169,59,.2),transparent 55%),linear-gradient(165deg,#123049,#081625)",
+    "radial-gradient(circle at 55% 14%,rgba(61,139,255,.32),transparent 55%),linear-gradient(165deg,#1B3A5F,#0A1B2E)",
+  ];
+
+  let active = "all", query = "", errorOn = false;
+
+  function card(c, i) {
+    return `<article class="group relative h-[360px] cursor-pointer overflow-hidden rounded-[20px] bg-brand-card transition-transform duration-300 hover:-translate-y-2 hover:shadow-[0_28px_50px_rgba(14,27,46,.28)]">
+      <div class="absolute inset-0" style="background:${GLOWS[i%9]}"></div>
+      <div class="absolute inset-0 flex -translate-y-[18px] items-center justify-center">
+        <svg class="h-[110px] w-[110px] text-white/90" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24" style="filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))">${ICON.music}</svg>
+      </div>
+      <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(8,15,28,.95) 0%,rgba(8,15,28,.25) 50%,transparent 72%)"></div>
+      ${c.popular?`<span class="absolute left-4 top-4 z-[2] rounded-full bg-brand-amber px-[11px] py-1.5 text-[0.63rem] font-extrabold uppercase tracking-wide text-void">Popular</span>`:""}
+      <span class="absolute right-4 top-4 z-[2] flex items-center gap-1.5 rounded-full border border-white/20 bg-void/50 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-wide text-white backdrop-blur-sm">
+        <span class="h-1.5 w-1.5 rounded-full bg-brand-cyan"></span>${c.level}
+      </span>
+      <div class="absolute inset-x-[22px] bottom-5 z-[2] text-white">
+        <h3 class="mb-1.5 font-serif text-[1.24rem] font-semibold leading-[1.28]">${c.title}</h3>
+        <p class="mb-2.5 text-[0.78rem] text-white/60">Por ${c.instructor}</p>
+        <div class="flex gap-3.5 text-[0.74rem] text-white/55">
+          <span class="flex items-center gap-1.5">${c.hours} horas</span>
+          <span class="flex items-center gap-1.5">${c.lessons} lecciones</span>
+        </div>
+      </div>
+    </article>`;
+  }
+
+  function render() {
+    const grid = document.getElementById("grid");
+    const empty = document.getElementById("empty");
+    const list = errorOn ? [] : COURSES.filter(c => {
+      const f = active==="all" || (active==="mine"&&c.mine) || (active==="popular"&&c.popular);
+      const q = !query || c.title.toLowerCase().includes(query) || c.instructor.toLowerCase().includes(query);
+      return f && q;
+    });
+    document.getElementById("alert").classList.toggle("hidden", !errorOn);
+
+    if (list.length) {
+      grid.innerHTML = list.map((c,i)=>card(c, COURSES.indexOf(c))).join("");
+      grid.classList.remove("hidden"); empty.classList.add("hidden"); empty.classList.remove("flex");
+    } else {
+      grid.classList.add("hidden");
+      if (!errorOn) {
+        const mine = active==="mine";
+        document.getElementById("empty-title").textContent = mine ? "Todavía no tienes cursos" : "No encontramos cursos";
+        document.getElementById("empty-text").textContent = mine
+          ? 'Cuando empieces uno desde "Todos los cursos", aparecerá aquí junto con tu progreso.'
+          : "Prueba con otro término de búsqueda o cambia el filtro seleccionado.";
+        empty.classList.remove("hidden"); empty.classList.add("flex");
+      } else { empty.classList.add("hidden"); empty.classList.remove("flex"); }
+    }
+  }
+
+  document.getElementById("filters").addEventListener("click", e => {
+    const btn = e.target.closest(".filter-btn"); if (!btn) return;
+    active = btn.dataset.filter;
+    document.querySelectorAll(".filter-btn").forEach(b => {
+      const on = b === btn;
+      b.classList.toggle("bg-navy", on); b.classList.toggle("text-white", on);
+      b.classList.toggle("text-brand-ink/50", !on); b.classList.toggle("hover:bg-brand-blue/10", !on);
+    });
+    render();
+  });
+  document.getElementById("search").addEventListener("input", e => { query = e.target.value.toLowerCase(); render(); });
+  function setError(v){ errorOn = (v===undefined) ? !errorOn : v; render(); }
+  function resetFilters(){ active="all"; query=""; document.getElementById("search").value=""; document.querySelector('[data-filter="all"]').click(); }
+  render();
+</script>
+</body>
+</html>
