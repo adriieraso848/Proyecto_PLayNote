@@ -125,9 +125,9 @@
           INICIAR SESIÓN
         </button>
       </form>
-      <a href="#" class="flex items-center justify-center gap-1.5 text-ivory/60 hover:text-brass-400 text-xs mt-5 transition">
+      <a href="RecoverPassword.html" class="flex items-center justify-center gap-1.5 text-ivory/60 hover:text-brass-400 text-xs mt-5 transition">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2" stroke-linecap="round"/>
+        <circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2" stroke-linecap="round"/>
         </svg>
         Olvidé mi contraseña
       </a>
@@ -138,7 +138,7 @@
     </div>
   </section>
   <script>
-    const usuariosRegistrados = [{ correo: 'demo@playnote.com', password: 'demo1234' }];
+    const usuariosRegistrados = JSON.parse(localStorage.getItem('usuarios')) || [];
     const form = document.getElementById('form-login');
     const errorCredenciales = document.getElementById('error-credenciales');
     const exito = document.getElementById('exito-login');
@@ -164,7 +164,7 @@
       const cuenta = usuariosRegistrados.find(u => u.correo === correo.value.trim().toLowerCase() && u.password === password.value);
       if (!cuenta) { errorCredenciales.classList.remove('hidden'); return; }
       exito.classList.remove('hidden');
-      setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+      setTimeout(() => { window.location.href = 'pagCursos.html'; }, 1200);
     });
   </script>
 </body>

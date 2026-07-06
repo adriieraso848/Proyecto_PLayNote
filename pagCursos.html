@@ -1,816 +1,227 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>PlayNote — Catálogo de cursos</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --void:#080F1C;
-    --navy:#0E1B2E;
-    --navy-2:#152947;
-    --navy-3:#1D3A61;
-    --ink:#0E1B2E;
-    --bg:#F4F7FB;
-    --card:#101F36;
-    --card-2:#16304F;
-    --blue:#3D8BFF;
-    --cyan:#5CD3E8;
-    --blue-soft:#AFD3FF;
-    --amber:#F0A93B;
-    --ivory:#FFFFFF;
-    --muted:rgba(14,27,46,0.56);
-    --line:rgba(14,27,46,0.08);
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Inter', sans-serif;
-    min-height:100vh;
-    -webkit-font-smoothing:antialiased;
-  }
-
-  /* ===== HEADER ===== */
-  header{
-    background:var(--void);
-    color:var(--ivory);
-    padding:0 44px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    height:74px;
-    position:sticky;
-    top:0;
-    z-index:30;
-  }
-  .brand{display:flex; align-items:center; gap:11px;}
-  .brand-mark{width:28px; height:28px; flex-shrink:0;}
-  .brand-name{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:1.32rem;
-    letter-spacing:0.2px;
-  }
-  nav.primary-nav{display:flex; gap:30px; list-style:none;}
-  nav.primary-nav a{
-    color:rgba(255,255,255,0.72);
-    text-decoration:none;
-    font-size:0.76rem;
-    letter-spacing:1.3px;
-    font-weight:600;
-    transition:color .2s;
-  }
-  nav.primary-nav a:hover{color:var(--cyan);}
-  .header-right{display:flex; align-items:center; gap:14px;}
-  .search-pill{
-    display:flex; align-items:center; gap:9px;
-    background:rgba(255,255,255,0.06);
-    border:1px solid rgba(255,255,255,0.14);
-    padding:9px 16px;
-    border-radius:999px;
-    transition:border-color .2s, background .2s;
-  }
-  .search-pill:focus-within{border-color:var(--cyan); background:rgba(92,211,232,0.08);}
-  .search-pill svg{width:14px; height:14px; flex-shrink:0; color:rgba(255,255,255,0.55);}
-  .search-pill input{
-    border:none; background:transparent; outline:none;
-    color:var(--ivory);
-    font-family:'Inter', sans-serif;
-    font-size:0.82rem;
-    width:170px;
-  }
-  .search-pill input::placeholder{color:rgba(255,255,255,0.4);}
-  .avatar-btn{
-    width:36px; height:36px; border-radius:50%;
-    background:linear-gradient(135deg, var(--blue), var(--cyan));
-    display:flex; align-items:center; justify-content:center;
-    color:var(--void);
-    cursor:pointer;
-    flex-shrink:0;
-  }
-
-  /* ===== HERO ===== */
-  .hero{
-    position:relative;
-    background:
-      radial-gradient(ellipse 700px 500px at 82% 8%, rgba(61,139,255,0.30), transparent 60%),
-      radial-gradient(ellipse 500px 400px at 10% 90%, rgba(92,211,232,0.16), transparent 60%),
-      linear-gradient(160deg, var(--void) 0%, var(--navy) 55%, var(--navy-2) 100%);
-    color:var(--ivory);
-    padding:88px 44px 130px;
-    overflow:hidden;
-  }
-  .hero-grain{
-    position:absolute; inset:0;
-    background-image:radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px);
-    background-size:28px 28px;
-    opacity:0.05;
-  }
-  .hero-inner{position:relative; max-width:620px; z-index:2;}
-  .hero-eyebrow{
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.7rem;
-    letter-spacing:2.6px;
-    text-transform:uppercase;
-    color:var(--cyan);
-    margin-bottom:20px;
-    display:flex; align-items:center; gap:10px;
-  }
-  .hero-eyebrow::before{content:''; width:26px; height:1px; background:var(--cyan);}
-  .hero h1{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:3.3rem;
-    line-height:1.08;
-    margin-bottom:22px;
-    letter-spacing:-0.5px;
-  }
-  .hero h1 em{
-    font-style:italic;
-    color:var(--cyan);
-  }
-  .hero p{
-    color:rgba(255,255,255,0.68);
-    max-width:440px;
-    font-size:1.02rem;
-    line-height:1.6;
-    margin-bottom:34px;
-  }
-  .hero-actions{display:flex; align-items:center; gap:22px;}
-  .btn-primary{
-    background:linear-gradient(120deg, var(--blue), #2E6FE0);
-    color:var(--ivory);
-    border:none;
-    font-weight:700;
-    font-size:0.9rem;
-    padding:15px 32px;
-    border-radius:999px;
-    cursor:pointer;
-    letter-spacing:0.2px;
-    box-shadow:0 12px 28px rgba(61,139,255,0.35);
-    transition:transform .2s, box-shadow .2s;
-  }
-  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 16px 34px rgba(61,139,255,0.45);}
-  .hero-scroll-hint{
-    display:flex; align-items:center; gap:8px;
-    color:rgba(255,255,255,0.5);
-    font-size:0.78rem;
-  }
-  .hero-scroll-hint svg{width:14px; height:14px; animation:bob 1.6s ease-in-out infinite;}
-  @keyframes bob{0%,100%{transform:translateY(0);} 50%{transform:translateY(4px);}}
-
-  /* signature: staff-pulse line */
-  .pulse-line{
-    position:absolute;
-    right:44px;
-    bottom:48px;
-    width:340px;
-    z-index:2;
-    opacity:0.9;
-  }
-
-  /* ===== SECTION HEAD (overlaps hero bottom) ===== */
-  .section-head{
-    max-width:1240px;
-    margin:-64px auto 0;
-    padding:0 44px 30px;
-    position:relative;
-    z-index:5;
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:16px;
-  }
-  .section-head-left .eyebrow{
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.68rem;
-    letter-spacing:2.2px;
-    text-transform:uppercase;
-    color:var(--blue);
-    margin-bottom:8px;
-  }
-  .section-head-left h2{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:1.7rem;
-    color:var(--ivory);
-    background:var(--navy);
-    display:inline;
-  }
-  .section-card{
-    background:var(--ivory);
-    border-radius:20px;
-    box-shadow:0 20px 50px rgba(14,27,46,0.14);
-    padding:26px 30px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:18px;
-    width:100%;
-  }
-  .section-title-block .eyebrow{
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.68rem;
-    letter-spacing:2.2px;
-    text-transform:uppercase;
-    color:var(--blue);
-    margin-bottom:6px;
-  }
-  .section-title-block h2{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:1.6rem;
-  }
-  .filters{
-    display:flex;
-    gap:6px;
-    background:var(--bg);
-    padding:6px;
-    border-radius:12px;
-  }
-  .filter-btn{
-    border:none;
-    background:transparent;
-    padding:10px 18px;
-    border-radius:8px;
-    font-size:0.85rem;
-    font-weight:600;
-    color:var(--ink);
-    opacity:0.5;
-    cursor:pointer;
-    transition:all .2s;
-    font-family:'Inter', sans-serif;
-  }
-  .filter-btn.active{background:var(--navy); color:var(--ivory); opacity:1;}
-  .filter-btn:not(.active):hover{opacity:0.85; background:rgba(61,139,255,0.08);}
-  .live-badge{
-    display:flex; align-items:center; gap:8px;
-    background:var(--navy);
-    color:var(--ivory);
-    padding:10px 18px;
-    border-radius:999px;
-    font-size:0.8rem;
-    font-weight:600;
-  }
-  .live-dot{width:7px; height:7px; border-radius:50%; background:var(--cyan); animation:pulse 1.8s ease-in-out infinite;}
-  @keyframes pulse{0%,100%{opacity:1; transform:scale(1);} 50%{opacity:0.35; transform:scale(0.7);}}
-
-  /* ===== ALERT ===== */
-  .alert-banner{max-width:1240px; margin:0 auto; padding:0 44px;}
-  .alert-banner .alert-box{
-    display:none; align-items:flex-start; gap:14px;
-    background:#FDEDED; border:1px solid #D65B5B; border-left:4px solid #C24545;
-    color:#93302F; padding:16px 20px; border-radius:14px; font-size:0.9rem;
-    margin:22px 0 -6px;
-  }
-  .alert-banner .alert-box.show{display:flex;}
-  .alert-box svg{width:20px; height:20px; flex-shrink:0; margin-top:1px;}
-  .alert-box strong{display:block; margin-bottom:2px; font-weight:700;}
-  .alert-retry{
-    margin-left:auto; background:#93302F; color:#fff; border:none;
-    padding:7px 14px; border-radius:7px; font-size:0.8rem; font-weight:600;
-    cursor:pointer; white-space:nowrap;
-  }
-
-  /* ===== GRID ===== */
-  .grid-section{max-width:1240px; margin:0 auto; padding:38px 44px 90px;}
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-    gap:26px;
-  }
-  .card{
-    position:relative;
-    height:360px;
-    border-radius:20px;
-    overflow:hidden;
-    cursor:pointer;
-    transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
-    background:var(--card);
-    isolation:isolate;
-  }
-  .card:hover{transform:translateY(-8px); box-shadow:0 28px 50px rgba(14,27,46,0.28);}
-  .card-glow{position:absolute; inset:0;}
-  .card:nth-child(9n+1) .card-glow{background:radial-gradient(circle at 25% 15%, rgba(61,139,255,0.4), transparent 55%), linear-gradient(165deg,#173456,#0B1A2C);}
-  .card:nth-child(9n+2) .card-glow{background:radial-gradient(circle at 75% 12%, rgba(92,211,232,0.32), transparent 55%), linear-gradient(165deg,#123049,#081625);}
-  .card:nth-child(9n+3) .card-glow{background:radial-gradient(circle at 50% 8%, rgba(61,139,255,0.35), transparent 55%), linear-gradient(165deg,#1B3A5F,#0A1B2E);}
-  .card:nth-child(9n+4) .card-glow{background:radial-gradient(circle at 30% 20%, rgba(240,169,59,0.22), transparent 55%), linear-gradient(165deg,#173456,#0B1A2C);}
-  .card:nth-child(9n+5) .card-glow{background:radial-gradient(circle at 70% 15%, rgba(92,211,232,0.3), transparent 55%), linear-gradient(165deg,#123049,#081625);}
-  .card:nth-child(9n+6) .card-glow{background:radial-gradient(circle at 40% 10%, rgba(61,139,255,0.3), transparent 55%), linear-gradient(165deg,#1B3A5F,#0A1B2E);}
-  .card:nth-child(9n+7) .card-glow{background:radial-gradient(circle at 60% 18%, rgba(92,211,232,0.28), transparent 55%), linear-gradient(165deg,#173456,#0B1A2C);}
-  .card:nth-child(9n+8) .card-glow{background:radial-gradient(circle at 35% 12%, rgba(240,169,59,0.2), transparent 55%), linear-gradient(165deg,#123049,#081625);}
-  .card:nth-child(9n+9) .card-glow{background:radial-gradient(circle at 55% 14%, rgba(61,139,255,0.32), transparent 55%), linear-gradient(165deg,#1B3A5F,#0A1B2E);}
-
-  .card-noise{
-    position:absolute; inset:0;
-    background-image:radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px);
-    background-size:24px 24px;
-    opacity:0.04;
-  }
-  .card-icon-ring{
-    position:absolute; top:50%; left:50%;
-    width:150px; height:150px;
-    transform:translate(-50%, -62%);
-    border-radius:50%;
-    background:radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
-  }
-  .card-icon{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; transform:translateY(-18px);}
-  .card-icon svg{width:110px; height:110px; filter:drop-shadow(0 8px 18px rgba(0,0,0,0.35));}
-  .card-overlay{
-    position:absolute; inset:0;
-    background:linear-gradient(to top, rgba(8,15,28,0.95) 0%, rgba(8,15,28,0.25) 50%, transparent 72%);
-  }
-  .level-tag{
-    position:absolute; top:16px; right:16px;
-    display:flex; align-items:center; gap:6px;
-    background:rgba(8,15,28,0.5);
-    border:1px solid rgba(255,255,255,0.18);
-    backdrop-filter:blur(6px);
-    color:var(--ivory);
-    font-size:0.65rem;
-    font-weight:700;
-    letter-spacing:0.8px;
-    text-transform:uppercase;
-    padding:6px 12px;
-    border-radius:999px;
-    z-index:2;
-  }
-  .level-tag .dot{width:6px; height:6px; border-radius:50%; background:var(--cyan);}
-  .popular-ribbon{
-    position:absolute; top:16px; left:16px; z-index:2;
-    background:var(--amber);
-    color:var(--void);
-    font-size:0.63rem;
-    font-weight:800;
-    letter-spacing:0.6px;
-    text-transform:uppercase;
-    padding:6px 11px;
-    border-radius:999px;
-  }
-  .card-content{position:absolute; left:22px; right:22px; bottom:20px; z-index:2; color:var(--ivory);}
-  .card-title{font-family:'Fraunces', serif; font-weight:600; font-size:1.24rem; line-height:1.28; margin-bottom:6px;}
-  .card-instructor{font-size:0.78rem; color:rgba(255,255,255,0.6); margin-bottom:10px;}
-  .card-meta{display:flex; gap:14px; font-size:0.74rem; color:rgba(255,255,255,0.55);}
-  .card-meta span{display:flex; align-items:center; gap:5px;}
-  .card-meta svg{width:12px; height:12px;}
-  .card-cta{
-    position:absolute; right:20px; bottom:20px; z-index:3;
-    width:38px; height:38px; border-radius:50%;
-    background:var(--ivory);
-    color:var(--navy);
-    display:flex; align-items:center; justify-content:center;
-    opacity:0; transform:translateY(6px) scale(0.9);
-    transition:opacity .25s ease, transform .25s ease;
-  }
-  .card:hover .card-cta{opacity:1; transform:translateY(0) scale(1);}
-  .card-cta svg{width:15px; height:15px;}
-
-  /* ===== EMPTY STATE ===== */
-  .empty-state{
-    display:none; flex-direction:column; align-items:center; text-align:center;
-    padding:80px 20px; gap:16px;
-    background:var(--ivory);
-    border-radius:20px;
-  }
-  .empty-state.show{display:flex;}
-  .empty-state svg{width:60px; height:60px; color:var(--blue);}
-  .empty-state h3{font-family:'Fraunces', serif; font-weight:600; font-size:1.35rem;}
-  .empty-state p{color:var(--muted); max-width:340px; font-size:0.92rem; line-height:1.5;}
-  .empty-state .btn-primary{margin-top:6px;}
-  .grid.hidden{display:none;}
-
-  /* ===== DEV TOGGLE ===== */
-  .dev-toggle{max-width:1240px; margin:0 auto; padding:0 44px 40px; display:flex; gap:10px; font-size:0.75rem;}
-  .dev-toggle button{
-    background:transparent; border:1px dashed rgba(14,27,46,0.25); color:rgba(14,27,46,0.5);
-    padding:6px 12px; border-radius:8px; cursor:pointer; font-family:'JetBrains Mono', monospace;
-  }
-  .dev-toggle button:hover{border-color:var(--blue); color:var(--ink);}
-
-  @media (max-width:900px){
-    .section-head{margin-top:-40px;}
-    .hero{padding:70px 24px 100px;}
-  }
-  @media (max-width:640px){
-    header{padding:0 20px;}
-    nav.primary-nav{display:none;}
-    .search-pill input{width:110px;}
-    .hero{padding:56px 20px 90px;}
-    .hero h1{font-size:2.3rem;}
-    .pulse-line{display:none;}
-    .section-head, .grid-section, .alert-banner, .dev-toggle{padding-left:20px; padding-right:20px;}
-    .section-card{padding:20px;}
-  }
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          void: "#080f1c", navy: "#0e1b2e", "navy-2": "#152947",
+          "brand-bg": "#f4f7fb", "brand-card": "#101f36",
+          "brand-blue": "#3d8bff", "brand-cyan": "#5cd3e8",
+          "brand-amber": "#f0a93b", "brand-ink": "#0e1b2e",
+        },
+        fontFamily: {
+          sans: ["Inter", "sans-serif"],
+          serif: ["Fraunces", "serif"],
+          mono: ["JetBrains Mono", "monospace"],
+        },
+        keyframes: {
+          bob: { "0%,100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(4px)" } },
+          livePulse: { "0%,100%": { opacity: 1, transform: "scale(1)" }, "50%": { opacity: 0.35, transform: "scale(0.7)" } },
+        },
+        animation: { bob: "bob 1.6s ease-in-out infinite", "live-pulse": "livePulse 1.8s ease-in-out infinite" },
+      },
+    },
+  };
+</script>
 </head>
-<body>
+<body class="min-h-screen bg-brand-bg font-sans text-brand-ink">
 
-<header>
-  <div class="brand">
-    <svg class="brand-mark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M9 18V5l12-2v13" stroke="#5CD3E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="6" cy="18" r="3" stroke="#5CD3E8" stroke-width="1.6"/>
-      <circle cx="18" cy="16" r="3" stroke="#5CD3E8" stroke-width="1.6"/>
-    </svg>
-    <span class="brand-name">PlayNote</span>
-  </div>
-  <ul class="primary-nav" style="display:flex; list-style:none; gap:30px;">
-    <li><a href="#">Cursos</a></li>
-    <li><a href="#">Explorar</a></li>
-    <li><a href="#">Comunidad</a></li>
-    <li><a href="#">Progreso</a></li>
-  </ul>
-  <div class="header-right">
-    <div class="search-pill">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <input type="text" id="searchInput" placeholder="Buscar cursos o instrumentos…" autocomplete="off">
+  <!-- HEADER -->
+  <header class="sticky top-0 z-30 flex h-[74px] items-center justify-between bg-void px-5 text-white md:px-11">
+    <div class="flex items-center gap-[11px]">
+      <div class="flex h-7 w-7 items-center justify-center rounded-md bg-gradient-to-br from-brand-blue to-brand-cyan text-void">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      </div>
+      <span class="font-serif text-[1.32rem] font-semibold tracking-tight">PlayNote</span>
     </div>
-    <div class="avatar-btn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+    <nav class="hidden gap-[30px] md:flex">
+      <a href="#" class="text-[0.76rem] font-semibold uppercase tracking-[1.3px] text-white/70 transition-colors hover:text-brand-cyan">Cursos</a>
+      <a href="#" class="text-[0.76rem] font-semibold uppercase tracking-[1.3px] text-white/70 transition-colors hover:text-brand-cyan">Explorar</a>
+      <a href="#" class="text-[0.76rem] font-semibold uppercase tracking-[1.3px] text-white/70 transition-colors hover:text-brand-cyan">Comunidad</a>
+      <a href="#" class="text-[0.76rem] font-semibold uppercase tracking-[1.3px] text-white/70 transition-colors hover:text-brand-cyan">Progreso</a>
+    </nav>
+    <div class="flex items-center gap-3.5">
+      <div class="flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 focus-within:border-brand-cyan">
+        <svg class="h-3.5 w-3.5 text-white/55" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="search" placeholder="Buscar curso…" class="w-[110px] bg-transparent text-[0.82rem] text-white outline-none placeholder:text-white/40 md:w-[170px]" />
+      </div>
+      <button class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue to-brand-cyan text-[0.8rem] font-bold text-void">PN</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden px-5 pb-[130px] pt-[70px] text-white md:px-11 md:pt-[88px]"
+    style="background:linear-gradient(160deg,#080f1c 0%,#0e1b2e 55%,#152947 100%)">
+    <div class="absolute inset-0" style="background:radial-gradient(ellipse 700px 500px at 82% 8%,rgba(61,139,255,.3),transparent 60%),radial-gradient(ellipse 500px 400px at 10% 90%,rgba(92,211,232,.16),transparent 60%)"></div>
+    <div class="absolute inset-0 opacity-[0.05]" style="background-image:radial-gradient(rgba(255,255,255,.5) 1px,transparent 1px);background-size:28px 28px"></div>
+    <div class="relative z-[2] max-w-[620px]">
+      <div class="mb-5 flex items-center gap-2.5 font-mono text-[0.7rem] uppercase tracking-[2.6px] text-brand-cyan">
+        <span class="h-px w-[26px] bg-brand-cyan"></span>Aprende a tu ritmo
+      </div>
+      <h1 class="mb-[22px] font-serif text-[2.3rem] font-semibold leading-[1.08] tracking-tight md:text-[3.3rem]">
+        Desbloquea tu <em class="italic text-brand-cyan">potencial musical</em>
+      </h1>
+      <p class="mb-[34px] max-w-[440px] text-[1.02rem] leading-relaxed text-white/70">
+        Nueve instrumentos, decenas de instructores y un progreso que se guarda solo. Empieza cuando quieras, donde quieras.
+      </p>
+      <div class="flex flex-wrap items-center gap-5">
+        <button
+          onclick="document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' })"
+          class="rounded-full bg-gradient-to-r from-blue-500 to-blue-700 px-8 py-[15px] text-[0.9rem] font-bold text-white shadow-[0_12px_28px_rgba(61,139,255,.35)] transition-all hover:-translate-y-0.5">
+            Explorar catálogo
+        </button>
+        <div class="flex items-center gap-2 text-[0.78rem] text-white/50">
+          <svg class="h-3.5 w-3.5 animate-bob" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Ver cursos
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION HEAD -->
+  <div class="relative z-[5] mx-auto -mt-10 max-w-[1240px] px-5 pb-[30px] md:-mt-16 md:px-11">
+    <div class="flex w-full flex-wrap items-center justify-between gap-[18px] rounded-[20px] bg-white p-5 shadow-[0_20px_50px_rgba(14,27,46,.14)] md:px-[30px] md:py-[26px]">
+      <div>
+        <p class="mb-1.5 font-mono text-[0.68rem] uppercase tracking-[2.2px] text-brand-blue">Catálogo</p>
+        <h2 class="font-serif text-[1.6rem] font-semibold">Descubre tu curso ideal</h2>
+      </div>
+      <div class="flex items-center gap-[18px]">
+        <div id="filters" class="flex gap-1.5 rounded-xl bg-brand-bg p-1.5">
+          <button data-filter="all" class="filter-btn rounded-lg bg-navy px-[18px] py-2.5 text-[0.85rem] font-semibold text-white">Todos los cursos</button>
+          <button data-filter="mine" class="filter-btn rounded-lg px-[18px] py-2.5 text-[0.85rem] font-semibold text-brand-ink/50 hover:bg-brand-blue/10">Mis cursos</button>
+          <button data-filter="popular" class="filter-btn rounded-lg px-[18px] py-2.5 text-[0.85rem] font-semibold text-brand-ink/50 hover:bg-brand-blue/10">Populares</button>
+        </div>
+        <div class="hidden items-center gap-2 rounded-full bg-navy px-[18px] py-2.5 text-[0.8rem] font-semibold text-white sm:flex">
+          <span class="h-[7px] w-[7px] rounded-full bg-brand-cyan animate-live-pulse"></span>En vivo
+        </div>
+      </div>
     </div>
   </div>
-</header>
 
-<section class="hero">
-  <div class="hero-grain"></div>
-  <svg class="pulse-line" viewBox="0 0 340 90" fill="none">
-    <path d="M2 45 Q40 8 78 45 T154 45 T230 45 T306 45" stroke="#3D8BFF" stroke-width="1.6" opacity="0.55" fill="none"/>
-    <circle cx="40" cy="24" r="4.5" fill="#5CD3E8"/>
-    <circle cx="116" cy="66" r="4.5" fill="#3D8BFF"/>
-    <circle cx="192" cy="24" r="4.5" fill="#5CD3E8"/>
-    <circle cx="268" cy="66" r="4.5" fill="#3D8BFF"/>
-  </svg>
-  <div class="hero-inner">
-    <div class="hero-eyebrow">Aprende a tu ritmo</div>
-    <h1>Desbloquea tu<br><em>potencial musical</em></h1>
-    <p>Nueve instrumentos, decenas de instructores y un progreso que se guarda solo. Empieza cuando quieras, donde quieras.</p>
-    <div class="hero-actions">
-      <button class="btn-primary" onclick="document.querySelector('[data-filter=todos]').click(); document.querySelector('.grid-section').scrollIntoView({behavior:'smooth'});">Explorar catálogo</button>
-      <div class="hero-scroll-hint">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-        Ver cursos
-      </div>
+  <!-- ALERT -->
+  <div id="alert" class="mx-auto hidden max-w-[1240px] px-5 md:px-11">
+    <div class="mb-[-6px] mt-[22px] flex items-start gap-3.5 rounded-[14px] border border-[#D65B5B] border-l-4 border-l-[#C24545] bg-[#FDEDED] px-5 py-4 text-[0.9rem] text-[#93302F]">
+      <svg class="mt-px h-5 w-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21.7 18-8-14a2 2 0 0 0-3.5 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3Z"/><path d="M12 9v4M12 17h.01"/></svg>
+      <div><strong class="mb-0.5 block font-bold">No pudimos cargar el catálogo</strong>La información recibida no tiene un formato válido. Intenta cargar la página de nuevo.</div>
+      <button onclick="setError(false)" class="ml-auto whitespace-nowrap rounded-md bg-[#93302F] px-3.5 py-[7px] text-[0.8rem] font-semibold text-white">Reintentar</button>
     </div>
   </div>
-</section>
 
-<div class="section-head">
-  <div class="section-card">
-    <div class="section-title-block">
-      <div class="eyebrow">Catálogo</div>
-      <h2>Descubre tu curso ideal</h2>
+  <!-- GRID -->
+  <section id="catalogo" class="grid-section" class="mx-auto max-w-[1240px] px-5 pb-[90px] pt-[38px] md:px-11">
+    <div id="grid" class="grid gap-[26px]" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))"></div>
+    <div id="empty" class="hidden flex-col items-center gap-4 rounded-[20px] bg-white px-5 py-20 text-center">
+      <svg class="h-[60px] w-[60px] text-brand-blue" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+      <h3 id="empty-title" class="font-serif text-[1.35rem] font-semibold"></h3>
+      <p id="empty-text" class="max-w-[340px] text-[0.92rem] leading-relaxed text-brand-ink/55"></p>
+      <button onclick="resetFilters()" class="mt-1.5 rounded-full px-8 py-[15px] text-[0.9rem] font-bold text-white shadow-[0_12px_28px_rgba(61,139,255,.35)] transition-all hover:-translate-y-0.5" style="background:linear-gradient(120deg,#3d8bff,#2e6fe0)">Explorar cursos</button>
     </div>
-    <div class="filters">
-      <button class="filter-btn active" data-filter="todos">Todos los cursos</button>
-      <button class="filter-btn" data-filter="mis">Mis cursos</button>
-      <button class="filter-btn" data-filter="populares">Populares</button>
-    </div>
-    <div class="live-badge"><span class="live-dot"></span> En vivo</div>
+  </section>
+
+  <!-- DEV TOGGLE -->
+  <div class="mx-auto flex max-w-[1240px] gap-2.5 px-5 pb-10 md:px-11">
+    <button onclick="setError()" class="rounded-lg border border-dashed border-brand-ink/25 px-3 py-1.5 font-mono text-[0.75rem] text-brand-ink/50 hover:border-brand-blue hover:text-brand-ink">Simular / ocultar error</button>
   </div>
-</div>
-
-<div class="alert-banner">
-  <div class="alert-box" id="errorAlert">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    <div>
-      <strong>No pudimos cargar el catálogo</strong>
-      La información recibida no tiene un formato válido. Intenta cargar la página de nuevo.
-    </div>
-    <button class="alert-retry" onclick="hideError()">Reintentar</button>
-  </div>
-</div>
-
-<section class="grid-section">
-  <div class="grid" id="courseGrid">
-
-    <article class="card" data-title="Violín: Técnica y Expresión" data-instructor="Laura Martínez" data-instrument="violín" data-popular="true">
-      <div class="card-glow"></div>
-      <div class="card-noise"></div>
-      <div class="card-icon-ring"></div>
-      <div class="card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#AFD3FF" stroke-width="1.1">
-          <path d="M14 3c-1 2-1 4 0 6-2 3-5 4-6 7-1 2 0 4 2 4s3-2 3-4c0-2 1-3 2-4 2 1 4 0 5-2s0-4-2-5c-1-1-3-2-4-2z"/>
-          <circle cx="10" cy="17" r="1.4" fill="#AFD3FF"/>
-        </svg>
-      </div>
-      <div class="card-overlay"></div>
-      <span class="popular-ribbon">Popular</span>
-      <span class="level-tag"><span class="dot"></span>Intermedio</span>
-      <div class="card-content">
-        <div class="card-title">Violín: Técnica y Expresión</div>
-        <div class="card-instructor">Por Laura Martínez</div>
-        <div class="card-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>11 horas</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 012-2h12a2 2 0 012 2v14"/><path d="M4 19h16"/></svg>30 lecciones</span>
-        </div>
-      </div>
-      <div class="card-cta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-    </article>
-
-    <article class="card" data-title="Guitarra: Técnica y Expresión" data-instructor="Alejandro Sans" data-instrument="guitarra" data-popular="true">
-      <div class="card-glow"></div>
-      <div class="card-noise"></div>
-      <div class="card-icon-ring"></div>
-      <div class="card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#AFD3FF" stroke-width="1.1">
-          <ellipse cx="11" cy="16" rx="6" ry="4"/>
-          <path d="M13 12L18 3"/>
-          <path d="M18 3l2 1-2 1"/>
-          <line x1="9" y1="16" x2="13" y2="14.2"/>
-        </svg>
-      </div>
-      <div class="card-overlay"></div>
-      <span class="popular-ribbon">Popular</span>
-      <span class="level-tag"><span class="dot"></span>Principiante</span>
-      <div class="card-content">
-        <div class="card-title">Guitarra: Técnica y Expresión</div>
-        <div class="card-instructor">Por Alejandro Sans</div>
-        <div class="card-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>18 horas</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 012-2h12a2 2 0 012 2v14"/><path d="M4 19h16"/></svg>40 lecciones</span>
-        </div>
-      </div>
-      <div class="card-cta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-    </article>
-
-    <article class="card" data-title="Piano: Técnica y Expresión" data-instructor="Miguel Arango" data-instrument="piano" data-popular="true">
-      <div class="card-glow"></div>
-      <div class="card-noise"></div>
-      <div class="card-icon-ring"></div>
-      <div class="card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#AFD3FF" stroke-width="1.1">
-          <rect x="4" y="6" width="16" height="12" rx="1"/>
-          <line x1="7" y1="6" x2="7" y2="18"/>
-          <line x1="10" y1="6" x2="10" y2="18"/>
-          <line x1="13" y1="6" x2="13" y2="18"/>
-          <line x1="16" y1="6" x2="16" y2="18"/>
-        </svg>
-      </div>
-      <div class="card-overlay"></div>
-      <span class="popular-ribbon">Popular</span>
-      <span class="level-tag"><span class="dot"></span>Intermedio</span>
-      <div class="card-content">
-        <div class="card-title">Piano: Técnica y Expresión</div>
-        <div class="card-instructor">Por Miguel Arango</div>
-        <div class="card-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>15 horas</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 012-2h12a2 2 0 012 2v14"/><path d="M4 19h16"/></svg>35 lecciones</span>
-        </div>
-      </div>
-      <div class="card-cta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-    </article>
-
-    <article class="card" data-title="Batería: Ritmo desde Cero" data-instructor="Carlos Peña" data-instrument="batería" data-popular="false">
-      <div class="card-glow"></div>
-      <div class="card-noise"></div>
-      <div class="card-icon-ring"></div>
-      <div class="card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#AFD3FF" stroke-width="1.1">
-          <ellipse cx="12" cy="9" rx="7" ry="3"/>
-          <path d="M5 9v5c0 1.7 3.1 3 7 3s7-1.3 7-3V9"/>
-          <line x1="9" y1="4" x2="15" y2="10"/>
-          <line x1="15" y1="4" x2="9" y2="10"/>
-        </svg>
-      </div>
-      <div class="card-overlay"></div>
-      <span class="level-tag"><span class="dot"></span>Principiante</span>
-      <div class="card-content">
-        <div class="card-title">Batería: Ritmo desde Cero</div>
-        <div class="card-instructor">Por Carlos Peña</div>
-        <div class="card-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>13 horas</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 012-2h12a2 2 0 012 2v14"/><path d="M4 19h16"/></svg>28 lecciones</span>
-        </div>
-      </div>
-      <div class="card-cta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-    </article>
-
-    <article class="card" data-title="Canto: Técnica Vocal Moderna" data-instructor="Sofía Reyes" data-instrument="canto voz" data-popular="true">
-      <div class="card-glow"></div>
-      <div class="card-noise"></div>
-      <div class="card-icon-ring"></div>
-      <div class="card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#AFD3FF" stroke-width="1.1">
-          <rect x="9" y="3" width="6" height="11" rx="3"/>
-          <path d="M6 11a6 6 0 0012 0"/>
-          <line x1="12" y1="17" x2="12" y2="21"/>
-          <line x1="9" y1="21" x2="15" y2="21"/>
-        </svg>
-      </div>
-      <div class="card-overlay"></div>
-      <span class="popular-ribbon">Popular</span>
-      <span class="level-tag"><span class="dot"></span>Intermedio</span>
-      <div class="card-content">
-        <div class="card-title">Canto: Técnica Vocal Moderna</div>
-        <div class="card-instructor">Por Sofía Reyes</div>
-        <div class="card-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>9 horas</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 012-2h12a2 2 0 012 2v14"/><path d="M4 19h16"/></svg>22 lecciones</span>
-        </div>
-      </div>
-      <div class="card-cta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-    </article>
-
-    <article class="card" data-title="Saxofón: Jazz y Blues" data-instructor="Daniel Ortiz" data-instrument="saxofón" data-popular="false">
-      <div class="card-glow"></div>
-      <div class="card-noise"></div>
-      <div class="card-icon-ring"></div>
-      <div class="card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#AFD3FF" stroke-width="1.1">
-          <path d="M9 3l2 2v9a4 4 0 004 4h1"/>
-          <circle cx="16" cy="18" r="2.4"/>
-          <circle cx="9" cy="4" r="1.3"/>
-        </svg>
-      </div>
-      <div class="card-overlay"></div>
-      <span class="level-tag"><span class="dot"></span>Avanzado</span>
-      <div class="card-content">
-        <div class="card-title">Saxofón: Jazz y Blues</div>
-        <div class="card-instructor">Por Daniel Ortiz</div>
-        <div class="card-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>16 horas</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 012-2h12a2 2 0 012 2v14"/><path d="M4 19h16"/></svg>32 lecciones</span>
-        </div>
-      </div>
-      <div class="card-cta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-    </article>
-
-    <article class="card" data-title="Flauta Traversa: Sonido y Respiración" data-instructor="Camila Rojas" data-instrument="flauta" data-popular="false">
-      <div class="card-glow"></div>
-      <div class="card-noise"></div>
-      <div class="card-icon-ring"></div>
-      <div class="card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#AFD3FF" stroke-width="1.1">
-          <rect x="3" y="10" width="18" height="3.4" rx="1.7"/>
-          <circle cx="8" cy="11.7" r="0.6" fill="#AFD3FF"/>
-          <circle cx="12" cy="11.7" r="0.6" fill="#AFD3FF"/>
-          <circle cx="16" cy="11.7" r="0.6" fill="#AFD3FF"/>
-        </svg>
-      </div>
-      <div class="card-overlay"></div>
-      <span class="level-tag"><span class="dot"></span>Principiante</span>
-      <div class="card-content">
-        <div class="card-title">Flauta Traversa: Sonido y Respiración</div>
-        <div class="card-instructor">Por Camila Rojas</div>
-        <div class="card-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>10 horas</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 012-2h12a2 2 0 012 2v14"/><path d="M4 19h16"/></svg>24 lecciones</span>
-        </div>
-      </div>
-      <div class="card-cta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-    </article>
-
-    <article class="card" data-title="Bajo Eléctrico: Groove Esencial" data-instructor="Andrés Gómez" data-instrument="bajo eléctrico" data-popular="false">
-      <div class="card-glow"></div>
-      <div class="card-noise"></div>
-      <div class="card-icon-ring"></div>
-      <div class="card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#AFD3FF" stroke-width="1.1">
-          <ellipse cx="9" cy="16" rx="5.5" ry="4"/>
-          <path d="M11 13L19 3"/>
-          <path d="M19 3l2 1-2 1"/>
-        </svg>
-      </div>
-      <div class="card-overlay"></div>
-      <span class="level-tag"><span class="dot"></span>Intermedio</span>
-      <div class="card-content">
-        <div class="card-title">Bajo Eléctrico: Groove Esencial</div>
-        <div class="card-instructor">Por Andrés Gómez</div>
-        <div class="card-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>14 horas</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 012-2h12a2 2 0 012 2v14"/><path d="M4 19h16"/></svg>29 lecciones</span>
-        </div>
-      </div>
-      <div class="card-cta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-    </article>
-
-    <article class="card" data-title="Ukelele: Acordes y Canciones" data-instructor="Valentina Cruz" data-instrument="ukelele" data-popular="true">
-      <div class="card-glow"></div>
-      <div class="card-noise"></div>
-      <div class="card-icon-ring"></div>
-      <div class="card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#AFD3FF" stroke-width="1.1">
-          <circle cx="9" cy="15" r="5"/>
-          <path d="M11 11L16 4"/>
-          <path d="M16 4l1.6 0.8-1.2 1.2"/>
-        </svg>
-      </div>
-      <div class="card-overlay"></div>
-      <span class="popular-ribbon">Popular</span>
-      <span class="level-tag"><span class="dot"></span>Principiante</span>
-      <div class="card-content">
-        <div class="card-title">Ukelele: Acordes y Canciones</div>
-        <div class="card-instructor">Por Valentina Cruz</div>
-        <div class="card-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>7 horas</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 012-2h12a2 2 0 012 2v14"/><path d="M4 19h16"/></svg>18 lecciones</span>
-        </div>
-      </div>
-      <div class="card-cta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-    </article>
-
-  </div>
-
-  <div class="empty-state" id="emptyState">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-      <path d="M9 18V5l12-2v13"/>
-      <circle cx="6" cy="18" r="3"/>
-      <circle cx="18" cy="16" r="3"/>
-    </svg>
-    <h3>Todavía no tienes cursos</h3>
-    <p>Cuando empieces uno desde "Todos los cursos", aparecerá aquí junto con tu progreso.</p>
-    <button class="btn-primary" onclick="document.querySelector('[data-filter=todos]').click()">Explorar cursos</button>
-  </div>
-</section>
-
-<div class="dev-toggle">
-  <button onclick="showError()">Simular error de carga</button>
-  <button onclick="hideError()">Ocultar alerta</button>
-</div>
 
 <script>
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const grid = document.getElementById('courseGrid');
-  const emptyState = document.getElementById('emptyState');
-  const searchInput = document.getElementById('searchInput');
-  const cards = Array.from(document.querySelectorAll('.card'));
-  let currentFilter = 'todos';
-
-  const emptyMessages = {
-    mis: {
-      title: 'Todavía no tienes cursos',
-      body: 'Cuando empieces uno desde "Todos los cursos", aparecerá aquí junto con tu progreso.',
-      showCta: true
-    },
-    search: {
-      title: 'No encontramos ese curso',
-      body: 'Prueba con el nombre de otro instrumento, por ejemplo "piano" o "canto".',
-      showCta: false
-    }
+  const ICON = {
+    music:'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
   };
+  const COURSES = [
+    {title:"Violín: Técnica y Expresión",instructor:"Laura Martínez",hours:11,lessons:30,level:"Intermedio",popular:true,mine:false},
+    {title:"Guitarra: Técnica y Expresión",instructor:"Alejandro Sans",hours:18,lessons:40,level:"Principiante",popular:true,mine:true},
+    {title:"Piano: Técnica y Expresión",instructor:"Miguel Arango",hours:15,lessons:35,level:"Intermedio",popular:true,mine:false},
+    {title:"Batería: Ritmo desde Cero",instructor:"Carlos Peña",hours:13,lessons:28,level:"Principiante",popular:false,mine:false},
+    {title:"Canto: Técnica Vocal Moderna",instructor:"Sofía Reyes",hours:9,lessons:22,level:"Intermedio",popular:true,mine:true},
+    {title:"Saxofón: Jazz y Blues",instructor:"Daniel Ortiz",hours:16,lessons:32,level:"Avanzado",popular:false,mine:false},
+    {title:"Flauta Traversa: Sonido y Respiración",instructor:"Camila Rojas",hours:10,lessons:24,level:"Principiante",popular:false,mine:false},
+    {title:"Bajo Eléctrico: Groove Esencial",instructor:"Andrés Gómez",hours:14,lessons:29,level:"Intermedio",popular:false,mine:false},
+    {title:"Ukelele: Acordes y Canciones",instructor:"Valentina Cruz",hours:7,lessons:18,level:"Principiante",popular:true,mine:false},
+  ];
+  const GLOWS = [
+    "radial-gradient(circle at 25% 15%,rgba(61,139,255,.4),transparent 55%),linear-gradient(165deg,#173456,#0B1A2C)",
+    "radial-gradient(circle at 75% 12%,rgba(92,211,232,.32),transparent 55%),linear-gradient(165deg,#123049,#081625)",
+    "radial-gradient(circle at 50% 8%,rgba(61,139,255,.35),transparent 55%),linear-gradient(165deg,#1B3A5F,#0A1B2E)",
+    "radial-gradient(circle at 30% 20%,rgba(240,169,59,.22),transparent 55%),linear-gradient(165deg,#173456,#0B1A2C)",
+    "radial-gradient(circle at 70% 15%,rgba(92,211,232,.3),transparent 55%),linear-gradient(165deg,#123049,#081625)",
+    "radial-gradient(circle at 40% 10%,rgba(61,139,255,.3),transparent 55%),linear-gradient(165deg,#1B3A5F,#0A1B2E)",
+    "radial-gradient(circle at 60% 18%,rgba(92,211,232,.28),transparent 55%),linear-gradient(165deg,#173456,#0B1A2C)",
+    "radial-gradient(circle at 35% 12%,rgba(240,169,59,.2),transparent 55%),linear-gradient(165deg,#123049,#081625)",
+    "radial-gradient(circle at 55% 14%,rgba(61,139,255,.32),transparent 55%),linear-gradient(165deg,#1B3A5F,#0A1B2E)",
+  ];
 
-  function normalize(str){
-    return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  let active = "all", query = "", errorOn = false;
+
+  function card(c, i) {
+    return `<article class="group relative h-[360px] cursor-pointer overflow-hidden rounded-[20px] bg-brand-card transition-transform duration-300 hover:-translate-y-2 hover:shadow-[0_28px_50px_rgba(14,27,46,.28)]">
+      <div class="absolute inset-0" style="background:${GLOWS[i%9]}"></div>
+      <div class="absolute inset-0 flex -translate-y-[18px] items-center justify-center">
+        <svg class="h-[110px] w-[110px] text-white/90" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24" style="filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))">${ICON.music}</svg>
+      </div>
+      <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(8,15,28,.95) 0%,rgba(8,15,28,.25) 50%,transparent 72%)"></div>
+      ${c.popular?`<span class="absolute left-4 top-4 z-[2] rounded-full bg-brand-amber px-[11px] py-1.5 text-[0.63rem] font-extrabold uppercase tracking-wide text-void">Popular</span>`:""}
+      <span class="absolute right-4 top-4 z-[2] flex items-center gap-1.5 rounded-full border border-white/20 bg-void/50 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-wide text-white backdrop-blur-sm">
+        <span class="h-1.5 w-1.5 rounded-full bg-brand-cyan"></span>${c.level}
+      </span>
+      <div class="absolute inset-x-[22px] bottom-5 z-[2] text-white">
+        <h3 class="mb-1.5 font-serif text-[1.24rem] font-semibold leading-[1.28]">${c.title}</h3>
+        <p class="mb-2.5 text-[0.78rem] text-white/60">Por ${c.instructor}</p>
+        <div class="flex gap-3.5 text-[0.74rem] text-white/55">
+          <span class="flex items-center gap-1.5">${c.hours} horas</span>
+          <span class="flex items-center gap-1.5">${c.lessons} lecciones</span>
+        </div>
+      </div>
+    </article>`;
   }
 
-  function setEmptyState(type){
-    const msg = emptyMessages[type];
-    emptyState.querySelector('h3').textContent = msg.title;
-    emptyState.querySelector('p').textContent = msg.body;
-    emptyState.querySelector('.btn-primary').style.display = msg.showCta ? 'inline-flex' : 'none';
-  }
-
-  function applyFilters(){
-    if (currentFilter === 'mis') {
-      grid.classList.add('hidden');
-      setEmptyState('mis');
-      emptyState.classList.add('show');
-      return;
-    }
-
-    const query = normalize(searchInput.value.trim());
-    let visibleCount = 0;
-
-    cards.forEach(card => {
-      const haystack = normalize(
-        card.dataset.title + ' ' + card.dataset.instructor + ' ' + card.dataset.instrument
-      );
-      const matchesQuery = query === '' || haystack.includes(query);
-      const matchesFilter = currentFilter !== 'populares' || card.dataset.popular === 'true';
-      const visible = matchesQuery && matchesFilter;
-      card.style.display = visible ? 'block' : 'none';
-      if (visible) visibleCount++;
+  function render() {
+    const grid = document.getElementById("grid");
+    const empty = document.getElementById("empty");
+    const list = errorOn ? [] : COURSES.filter(c => {
+      const f = active==="all" || (active==="mine"&&c.mine) || (active==="popular"&&c.popular);
+      const q = !query || c.title.toLowerCase().includes(query) || c.instructor.toLowerCase().includes(query);
+      return f && q;
     });
+    document.getElementById("alert").classList.toggle("hidden", !errorOn);
 
-    if (visibleCount === 0) {
-      grid.classList.add('hidden');
-      setEmptyState('search');
-      emptyState.classList.add('show');
+    if (list.length) {
+      grid.innerHTML = list.map((c,i)=>card(c, COURSES.indexOf(c))).join("");
+      grid.classList.remove("hidden"); empty.classList.add("hidden"); empty.classList.remove("flex");
     } else {
-      grid.classList.remove('hidden');
-      emptyState.classList.remove('show');
+      grid.classList.add("hidden");
+      if (!errorOn) {
+        const mine = active==="mine";
+        document.getElementById("empty-title").textContent = mine ? "Todavía no tienes cursos" : "No encontramos cursos";
+        document.getElementById("empty-text").textContent = mine
+          ? 'Cuando empieces uno desde "Todos los cursos", aparecerá aquí junto con tu progreso.'
+          : "Prueba con otro término de búsqueda o cambia el filtro seleccionado.";
+        empty.classList.remove("hidden"); empty.classList.add("flex");
+      } else { empty.classList.add("hidden"); empty.classList.remove("flex"); }
     }
   }
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentFilter = btn.dataset.filter;
-      applyFilters();
+  document.getElementById("filters").addEventListener("click", e => {
+    const btn = e.target.closest(".filter-btn"); if (!btn) return;
+    active = btn.dataset.filter;
+    document.querySelectorAll(".filter-btn").forEach(b => {
+      const on = b === btn;
+      b.classList.toggle("bg-navy", on); b.classList.toggle("text-white", on);
+      b.classList.toggle("text-brand-ink/50", !on); b.classList.toggle("hover:bg-brand-blue/10", !on);
     });
+    render();
   });
-
-  searchInput.addEventListener('input', applyFilters);
-
-  function showError(){ document.getElementById('errorAlert').classList.add('show'); }
-  function hideError(){ document.getElementById('errorAlert').classList.remove('show'); }
+  document.getElementById("search").addEventListener("input", e => { query = e.target.value.toLowerCase(); render(); });
+  function setError(v){ errorOn = (v===undefined) ? !errorOn : v; render(); }
+  function resetFilters(){ active="all"; query=""; document.getElementById("search").value=""; document.querySelector('[data-filter="all"]').click(); }
+  render();
 </script>
-
 </body>
 </html>

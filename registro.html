@@ -139,7 +139,7 @@
       </div>
     </section>
   <script>
-    const usuariosRegistrados = [];
+    const usuariosRegistrados = JSON.parse(localStorage.getItem('usuarios')) || [];
     const form = document.getElementById('form-registro');
     const exito = document.getElementById('exito-registro');
     function mostrarError(input, mensaje) {
@@ -165,6 +165,8 @@
       if (password2.value !== password.value || !password2.value) { mostrarError(password2, 'No coinciden.'); valido = false; }
       if (!valido) return;
       usuariosRegistrados.push({ nombre: nombre.value.trim(), correo: correo.value.trim().toLowerCase(), password: password.value });
+      usuariosRegistrados.push({ nombre: nombre.value.trim(), correo: correo.value.trim().toLowerCase(), password: password.value });
+      localStorage.setItem('usuarios', JSON.stringify(usuariosRegistrados));
       exito.classList.remove('hidden');
       form.reset();
       setTimeout(() => { window.location.href = 'login.html'; }, 1400);
