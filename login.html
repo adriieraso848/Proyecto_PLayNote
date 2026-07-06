@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Iniciar sesión — PlayNote</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ['"Fraunces"', 'serif'],
+              sans: ['"Work Sans"', 'sans-serif'],
+              mono: ['"IBM Plex Mono"', 'monospace'],
+            },
+            colors: {
+              ink: { DEFAULT: '#0F172A', 800: '#1E293B' },      // Azul oscuro
+              brass: { DEFAULT: '#3B82F6', 400: '#60A5FA', 600: '#2563EB' }, // Azul principal
+              ivory: '#F8FAFC',                                // Fondo claro
+              ember: { DEFAULT: '#0EA5E9', 600: '#0284C7' },   // Azul celeste
+              sage: '#38BDF8',                                // Azul claro
+              charcoal: '#334155',                            // Gris azulado
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body { font-family: 'Work Sans', sans-serif; background:#1E293B; }
+      .grain {
+        background-image: radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px);
+        background-size: 3px 3px;
+      }
+      .hero-bg {background-image:
+        linear-gradient(180deg, rgba(34,25,18,0.55) 0%, rgba(34,25,18,0.88) 100%),
+        url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1600&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center;
+      }
+  .staff {
+    height: 42px;
+  }
+  .staff line{
+    stroke:#3B82F6;
+}
+
+.staff circle{
+    fill:#3B82F6;
+}
+
+  @media (prefers-reduced-motion: no-preference) {
+    .rise { animation: rise 0.8s cubic-bezier(.22,1,.36,1) both; }
+    .rise-1 { animation-delay: .05s; }
+    .rise-2 { animation-delay: .18s; }
+    .rise-3 { animation-delay: .32s; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
+
+  .card-img { transition: transform .6s cubic-bezier(.22,1,.36,1); }
+  .card:hover .card-img { transform: scale(1.06); }
+  .card:hover .card-title{ color:#60A5FA;}
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid #C69C4E;
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body class="text-charcoal">
+  <!-- Header -->
+  <header class="bg-ink grain">
+    <nav class="max-w-7xl mx-auto flex items-center px-6 py-5">
+      <a href="index.html" class="flex items-center gap-2 text-ivory">
+        <span class="text-brass text-xl leading-none">♫</span>
+        <span class="font-display text-xl font-semibold tracking-wide">PlayNote</span>
+      </a>
+    </nav>
+  </header>
+  <!-- Login -->
+  <section class="bg-ink-800 min-h-[calc(100vh-78px)] flex items-center justify-center px-6 py-14">
+    <div class="bg-ink-800 rounded-3xl shadow-1xl w-full max-w-sm p-8">
+        <h1 class="font-display text-3xl font-semibold text-center leading-tight">
+        <span class="text-ivory">Bienvenido</span> <span class="text-brass-400">de vuelta</span>
+      </h1>
+      <p class="text-ivory/60 text-sm text-center mt-2 mb-8">
+        Retoma tu curso justo donde lo dejaste.
+      </p>
+      <form id="form-login" class="space-y-4" novalidate>
+        <div>
+          <div class="flex items-center gap-3 bg-ivory rounded-full px-4 py-3">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#221912" stroke-width="1.8" class="shrink-0">
+              <path d="M3 6h18v12H3z" stroke-linejoin="round"/><path d="M3 7l9 6 9-6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <input type="email" id="correo" name="correo" required
+              class="w-full bg-transparent focus:outline-none text-sm placeholder:text-charcoal/40"
+              placeholder="Correo electrónico">
+          </div>
+          <p class="error-msg hidden text-ember-600 text-xs mt-1.5 px-4"></p>
+        </div>
+        <div>
+          <div class="flex items-center gap-3 bg-ivory rounded-full px-4 py-3">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#221912" stroke-width="1.8" class="shrink-0">
+              <rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke-linecap="round"/>
+            </svg>
+            <input type="password" id="password" name="password" required
+              class="w-full bg-transparent focus:outline-none text-sm placeholder:text-charcoal/40"
+              placeholder="Contraseña">
+          </div>
+          <p class="error-msg hidden text-ember-600 text-xs mt-1.5 px-4"></p>
+        </div>
+        <p id="error-credenciales" class="hidden text-ember-600 text-xs text-center px-2">
+          El correo o la contraseña no coinciden con ninguna cuenta registrada.
+        </p>
+        <div id="exito-login" class="hidden text-center text-sage text-sm font-medium">
+          ✅ Acceso concedido. Redirigiendo a tu perfil...
+        </div>
+        <button type="submit"
+          class="w-full bg-ember hover:bg-ember-600 transition text-ivory text-sm font-semibold tracking-wide rounded-full py-3 mt-2">
+          INICIAR SESIÓN
+        </button>
+      </form>
+      <a href="#" class="flex items-center justify-center gap-1.5 text-ivory/60 hover:text-brass-400 text-xs mt-5 transition">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2" stroke-linecap="round"/>
+        </svg>
+        Olvidé mi contraseña
+      </a>
+      <p class="text-center text-ivory/60 text-xs mt-5">
+        ¿No tienes cuenta?
+        <a href="registro.html" class="text-brass-400 hover:text-brass transition">Regístrate</a>
+      </p>
+    </div>
+  </section>
+  <script>
+    const usuariosRegistrados = [{ correo: 'demo@playnote.com', password: 'demo1234' }];
+    const form = document.getElementById('form-login');
+    const errorCredenciales = document.getElementById('error-credenciales');
+    const exito = document.getElementById('exito-login');
+    function mostrarError(input, mensaje) {
+      const p = input.closest('div').nextElementSibling;
+      p.textContent = mensaje;
+      p.classList.remove('hidden');
+    }
+    function limpiarError(input) {
+      input.closest('div').nextElementSibling.classList.add('hidden');
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      errorCredenciales.classList.add('hidden');
+      exito.classList.add('hidden');
+      const correo = document.getElementById('correo');
+      const password = document.getElementById('password');
+      [correo, password].forEach(limpiarError);
+      let valido = true;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.value)) { mostrarError(correo, 'Correo inválido.'); valido = false; }
+      if (!password.value) { mostrarError(password, 'Ingresa tu contraseña.'); valido = false; }
+      if (!valido) return;
+      const cuenta = usuariosRegistrados.find(u => u.correo === correo.value.trim().toLowerCase() && u.password === password.value);
+      if (!cuenta) { errorCredenciales.classList.remove('hidden'); return; }
+      exito.classList.remove('hidden');
+      setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+    });
+  </script>
+</body>
+</html>
