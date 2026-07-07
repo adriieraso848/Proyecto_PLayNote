@@ -150,15 +150,16 @@
     mine: false
   },
   {
-    title: "Guitarra: Técnica y Expresión",
-    instructor: "Alejandro Sans",
-    image: "img/guitarra.jpg",
-    hours: 18,
-    lessons: 40,
-    level: "Principiante",
-    popular: true,
-    mine: true
-  },
+  title: "Guitarra: Básico en Guitarra",
+  instructor: "Alejandro Sans",
+  image: "img/guitarra.jpg",
+  link: "inscripcionCurso.html",
+  hours: 18,
+  lessons: 40,
+  level: "Principiante",
+  popular: true,
+  mine: false
+},
   {
     title: "Piano: Técnica y Expresión",
     instructor: "Miguel Arango",
@@ -245,31 +246,54 @@
   let active = "all", query = "", errorOn = false;
 
   function card(c, i) {
-    return `<article class="group relative h-[360px] cursor-pointer overflow-hidden rounded-[20px] bg-brand-card transition-transform duration-300 hover:-translate-y-2 hover:shadow-[0_28px_50px_rgba(14,27,46,.28)]">
-      <div class="absolute inset-0" style="background:${GLOWS[i%9]}"></div>
-      <div class="absolute inset-0 flex -translate-y-[18px] items-center justify-center">
-        <svg class="h-[110px] w-[110px] text-white/90" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24" style="filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))">${ICON.music}</svg>
-      </div>
+
+  const content = `
+    <article class="group relative h-[360px] cursor-pointer overflow-hidden rounded-[20px] bg-brand-card transition-transform duration-300 hover:-translate-y-2 hover:shadow-[0_28px_50px_rgba(14,27,46,.28)]">
+
+      <div class="absolute inset-0" style="background:${GLOWS[i % 9]}"></div>
+
       <div class="absolute inset-0">
         <img
           src="${c.image}"
           alt="${c.title}"
           class="h-full w-full object-cover">
-    </div>
-      ${c.popular?`<span class="absolute left-4 top-4 z-[2] rounded-full bg-brand-amber px-[11px] py-1.5 text-[0.63rem] font-extrabold uppercase tracking-wide text-void">Popular</span>`:""}
-      <span class="absolute right-4 top-4 z-[2] flex items-center gap-1.5 rounded-full border border-white/20 bg-void/50 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-wide text-white backdrop-blur-sm">
-        <span class="h-1.5 w-1.5 rounded-full bg-brand-cyan"></span>${c.level}
-      </span>
-      <div class="absolute inset-x-[22px] bottom-5 z-[2] text-white">
-        <h3 class="mb-1.5 font-serif text-[1.24rem] font-semibold leading-[1.28]">${c.title}</h3>
-        <p class="mb-2.5 text-[0.78rem] text-white/60">Por ${c.instructor}</p>
-        <div class="flex gap-3.5 text-[0.74rem] text-white/55">
-          <span class="flex items-center gap-1.5">${c.hours} horas</span>
-          <span class="flex items-center gap-1.5">${c.lessons} lecciones</span>
-        </div>
       </div>
-    </article>`;
-  }
+
+      ${c.popular ? `
+        <span class="absolute left-4 top-4 z-[2] rounded-full bg-brand-amber px-[11px] py-1.5 text-[0.63rem] font-extrabold uppercase tracking-wide text-void">
+          Popular
+        </span>
+      ` : ""}
+
+      <span class="absolute right-4 top-4 z-[2] flex items-center gap-1.5 rounded-full border border-white/20 bg-void/50 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-wide text-white backdrop-blur-sm">
+        <span class="h-1.5 w-1.5 rounded-full bg-brand-cyan"></span>
+        ${c.level}
+      </span>
+
+      <div class="absolute inset-x-[22px] bottom-5 z-[2] text-white">
+
+        <h3 class="mb-1.5 font-serif text-[1.24rem] font-semibold leading-[1.28]">
+          ${c.title}
+        </h3>
+
+        <p class="mb-2.5 text-[0.78rem] text-white/60">
+          Por ${c.instructor}
+        </p>
+
+        <div class="flex gap-3.5 text-[0.74rem] text-white/55">
+          <span>${c.hours} horas</span>
+          <span>${c.lessons} lecciones</span>
+        </div>
+
+      </div>
+
+    </article>
+  `;
+
+  return c.link
+    ? `<a href="${c.link}" class="block">${content}</a>`
+    : content;
+}
 
   function render() {
     const grid = document.getElementById("grid");
