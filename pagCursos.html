@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PlayNote — Catálogo de cursos</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlayNote — Catálogo de cursos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
   tailwind.config = {
     theme: {
       extend: {
@@ -116,7 +116,7 @@
   </div>
 
   <!-- GRID -->
-  <section id="catalogo" class="grid-section" class="mx-auto max-w-[1240px] px-5 pb-[90px] pt-[38px] md:px-11">
+  <section id="catalogo" class="mx-auto max-w-[1240px] px-5 pb-[90px] pt-[38px] md:px-11">
     <div
     id="grid"
     class="grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
@@ -134,207 +134,7 @@
     <button onclick="setError()" class="rounded-lg border border-dashed border-brand-ink/25 px-3 py-1.5 font-mono text-[0.75rem] text-brand-ink/50 hover:border-brand-blue hover:text-brand-ink">Simular / ocultar error</button>
   </div>
 
-<script>
-  const ICON = {
-    music:'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
-  };
-  const COURSES = [
-  {
-    title: "Violín: Técnica y Expresión",
-    instructor: "Laura Martínez",
-    image: "img/violin.jpg",
-    hours: 11,
-    lessons: 30,
-    level: "Intermedio",
-    popular: true,
-    mine: false
-  },
-  {
-  title: "Guitarra: Básico en Guitarra",
-  instructor: "Alejandro Sans",
-  image: "img/guitarra1.jpg",
-  link: "desCurso.html",
-  hours: 18,
-  lessons: 40,
-  level: "Principiante",
-  popular: true,
-  mine: false
-},
-  {
-    title: "Piano: Técnica y Expresión",
-    instructor: "Miguel Arango",
-    image: "img/piano.jpg",
-    hours: 15,
-    lessons: 35,
-    level: "Intermedio",
-    popular: true,
-    mine: false
-  },
-  {
-    title: "Batería: Ritmo desde Cero",
-    instructor: "Carlos Peña",
-    image: "img/bateria.jpg",
-    hours: 13,
-    lessons: 28,
-    level: "Principiante",
-    popular: false,
-    mine: false
-  },
-  {
-    title: "Canto: Técnica Vocal Moderna",
-    instructor: "Sofía Reyes",
-    image: "img/canto.jpg",
-    hours: 9,
-    lessons: 22,
-    level: "Intermedio",
-    popular: true,
-    mine: true
-  },
-  {
-    title: "Saxofón: Jazz y Blues",
-    instructor: "Daniel Ortiz",
-    image: "img/saxofon.jpg",
-    hours: 16,
-    lessons: 32,
-    level: "Avanzado",
-    popular: false,
-    mine: false
-  },
-  {
-    title: "Flauta Traversa: Sonido y Respiración",
-    instructor: "Camila Rojas",
-    image: "img/flauta.jpg",
-    hours: 10,
-    lessons: 24,
-    level: "Principiante",
-    popular: false,
-    mine: false
-  },
-  {
-    title: "Bajo Eléctrico: Groove Esencial",
-    instructor: "Andrés Gómez",
-    image: "img/bajo.jpg",
-    hours: 14,
-    lessons: 29,
-    level: "Intermedio",
-    popular: false,
-    mine: false
-  },
-  {
-    title: "Ukelele: Acordes y Canciones",
-    instructor: "Valentina Cruz",
-    image: "img/ukelele.jpg",
-    hours: 7,
-    lessons: 18,
-    level: "Principiante",
-    popular: true,
-    mine: false
-  }
-];
-  const GLOWS = [
-    "radial-gradient(circle at 25% 15%,rgba(61,139,255,.4),transparent 55%),linear-gradient(165deg,#173456,#0B1A2C)",
-    "radial-gradient(circle at 75% 12%,rgba(92,211,232,.32),transparent 55%),linear-gradient(165deg,#123049,#081625)",
-    "radial-gradient(circle at 50% 8%,rgba(61,139,255,.35),transparent 55%),linear-gradient(165deg,#1B3A5F,#0A1B2E)",
-    "radial-gradient(circle at 30% 20%,rgba(240,169,59,.22),transparent 55%),linear-gradient(165deg,#173456,#0B1A2C)",
-    "radial-gradient(circle at 70% 15%,rgba(92,211,232,.3),transparent 55%),linear-gradient(165deg,#123049,#081625)",
-    "radial-gradient(circle at 40% 10%,rgba(61,139,255,.3),transparent 55%),linear-gradient(165deg,#1B3A5F,#0A1B2E)",
-    "radial-gradient(circle at 60% 18%,rgba(92,211,232,.28),transparent 55%),linear-gradient(165deg,#173456,#0B1A2C)",
-    "radial-gradient(circle at 35% 12%,rgba(240,169,59,.2),transparent 55%),linear-gradient(165deg,#123049,#081625)",
-    "radial-gradient(circle at 55% 14%,rgba(61,139,255,.32),transparent 55%),linear-gradient(165deg,#1B3A5F,#0A1B2E)",
-  ];
-
-  let active = "all", query = "", errorOn = false;
-
-  function card(c, i) {
-
-  const content = `
-    <article class="group relative h-[360px] cursor-pointer overflow-hidden rounded-[20px] bg-brand-card transition-transform duration-300 hover:-translate-y-2 hover:shadow-[0_28px_50px_rgba(14,27,46,.28)]">
-
-      <div class="absolute inset-0" style="background:${GLOWS[i % 9]}"></div>
-
-      <div class="absolute inset-0">
-        <img
-          src="${c.image}"
-          alt="${c.title}"
-          class="h-full w-full object-cover">
-      </div>
-
-      ${c.popular ? `
-        <span class="absolute left-4 top-4 z-[2] rounded-full bg-brand-amber px-[11px] py-1.5 text-[0.63rem] font-extrabold uppercase tracking-wide text-void">
-          Popular
-        </span>
-      ` : ""}
-
-      <span class="absolute right-4 top-4 z-[2] flex items-center gap-1.5 rounded-full border border-white/20 bg-void/50 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-wide text-white backdrop-blur-sm">
-        <span class="h-1.5 w-1.5 rounded-full bg-brand-cyan"></span>
-        ${c.level}
-      </span>
-
-      <div class="absolute inset-x-[22px] bottom-5 z-[2] text-white">
-
-        <h3 class="mb-1.5 font-serif text-[1.24rem] font-semibold leading-[1.28]">
-          ${c.title}
-        </h3>
-
-        <p class="mb-2.5 text-[0.78rem] text-white/60">
-          Por ${c.instructor}
-        </p>
-
-        <div class="flex gap-3.5 text-[0.74rem] text-white/55">
-          <span>${c.hours} horas</span>
-          <span>${c.lessons} lecciones</span>
-        </div>
-
-      </div>
-
-    </article>
-  `;
-
-  return c.link
-    ? `<a href="${c.link}" class="block">${content}</a>`
-    : content;
-}
-
-  function render() {
-    const grid = document.getElementById("grid");
-    const empty = document.getElementById("empty");
-    const list = errorOn ? [] : COURSES.filter(c => {
-      const f = active==="all" || (active==="mine"&&c.mine) || (active==="popular"&&c.popular);
-      const q = !query || c.title.toLowerCase().includes(query) || c.instructor.toLowerCase().includes(query);
-      return f && q;
-    });
-    document.getElementById("alert").classList.toggle("hidden", !errorOn);
-
-    if (list.length) {
-      grid.innerHTML = list.map((c,i)=>card(c, COURSES.indexOf(c))).join("");
-      grid.classList.remove("hidden"); empty.classList.add("hidden"); empty.classList.remove("flex");
-    } else {
-      grid.classList.add("hidden");
-      if (!errorOn) {
-        const mine = active==="mine";
-        document.getElementById("empty-title").textContent = mine ? "Todavía no tienes cursos" : "No encontramos cursos";
-        document.getElementById("empty-text").textContent = mine
-          ? 'Cuando empieces uno desde "Todos los cursos", aparecerá aquí junto con tu progreso.'
-          : "Prueba con otro término de búsqueda o cambia el filtro seleccionado.";
-        empty.classList.remove("hidden"); empty.classList.add("flex");
-      } else { empty.classList.add("hidden"); empty.classList.remove("flex"); }
-    }
-  }
-
-  document.getElementById("filters").addEventListener("click", e => {
-    const btn = e.target.closest(".filter-btn"); if (!btn) return;
-    active = btn.dataset.filter;
-    document.querySelectorAll(".filter-btn").forEach(b => {
-      const on = b === btn;
-      b.classList.toggle("bg-navy", on); b.classList.toggle("text-white", on);
-      b.classList.toggle("text-brand-ink/50", !on); b.classList.toggle("hover:bg-brand-blue/10", !on);
-    });
-    render();
-  });
-  document.getElementById("search").addEventListener("input", e => { query = e.target.value.toLowerCase(); render(); });
-  function setError(v){ errorOn = (v===undefined) ? !errorOn : v; render(); }
-  function resetFilters(){ active="all"; query=""; document.getElementById("search").value=""; document.querySelector('[data-filter="all"]').click(); }
-  render();
-</script>
+  <!-- Todo el JavaScript de esta página vive en JS/cursos.js -->
+  <script src="./JS/cursos.js"></script>
 </body>
 </html>
