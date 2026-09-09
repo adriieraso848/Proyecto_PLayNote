@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  
+<head>
+    <title>Crea tu cuenta — PlayNote</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Configuración de Tailwind -->
+    <script>
+
+        tailwind.config = {
+
+            theme: {
+
+                extend: {
+
+                    fontFamily: {
+                        display: ['"Fraunces"', 'serif'],
+                        sans: ['"Work Sans"', 'sans-serif'],
+                        mono: ['"IBM Plex Mono"', 'monospace'],
+                    },
+
+                    colors: {
+
+                        ink: {
+                            DEFAULT: '#0F172A',
+                            800: '#1E293B'
+                        },
+
+                        brass: {
+                            DEFAULT: '#3B82F6',
+                            400: '#60A5FA',
+                            600: '#2563EB'
+                        },
+
+                        ivory: '#F8FAFC',
+
+                        ember: {
+                            DEFAULT: '#0EA5E9',
+                            600: '#0284C7'
+                        },
+
+                        sage: '#38BDF8',
+
+                        charcoal: '#334155'
+                    }
+                }
+            }
+        }
+
+    </script>
+
+    <!-- Estilos -->
+    <style>
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: #1E293B;
+        }
+
+        .grain {
+            background-image: radial-gradient(
+                circle,
+                rgba(255,255,255,0.035) 1px,
+                transparent 1px
+            );
+
+            background-size: 3px 3px;
+        }
+
+    </style>
+
+</head>
+
+
+<body class="text-charcoal">
+
+
+    <!--- HEADER --->
+
+    <header class="bg-ink grain">
+
+        <nav class="max-w-7xl mx-auto flex items-center px-6 py-5">
+
+            <!-- Logo -->
+            <a
+                href="index.html"
+                class="flex items-center gap-2 text-ivory"
+            >
+
+                <span class="text-brass text-xl leading-none">
+                    ♫
+                </span>
+
+                <span class="font-display text-xl font-semibold tracking-wide">
+                    PlayNote
+                </span>
+
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!---- REGISTRO ---->
+
+    <section
+        class="bg-ink-800 min-h-[calc(100vh-78px)] flex items-center justify-center px-6 py-14"
+    >
+
+        <!-- Tarjeta del formulario -->
+        <div class="bg-ink-800 rounded-3xl shadow-1xl w-full max-w-sm p-8">
+
+
+            <!-- Título -->
+            <h1 class="font-display text-3xl font-semibold text-center leading-tight">
+
+                <span class="text-ivory">
+                    Crea
+                </span>
+
+                <span class="text-brass-400">
+                    tu cuenta
+                </span>
+
+            </h1>
+
+
+            <!-- Descripción -->
+            <p class="text-ivory/60 text-sm text-center mt-2 mb-8">
+
+                Toca tu instrumento favorito ahora mismo.
+
+            </p>
+
+
+            <!--- FORMULARIO --->
+
+            <form
+                id="form-registro"
+                class="space-y-4"
+            >
+
+
+                <!-- NOMBRE -->
+
+                <div>
+
+                    <div class="flex items-center gap-3 bg-ivory rounded-full px-4 py-3">
+
+                        <input
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            class="w-full bg-transparent focus:outline-none text-sm placeholder:text-charcoal/40"
+                            placeholder="Nombre completo"
+                        >
+
+                    </div>
+
+                    <p
+                        id="error-nombre"
+                        class="hidden text-ember-600 text-xs mt-1.5 px-4"
+                    ></p>
+
+                </div>
+
+
+                <!-- CORREO -->
+
+                <div>
+
+                    <div class="flex items-center gap-3 bg-ivory rounded-full px-4 py-3">
+
+                        <input
+                            type="email"
+                            id="correo"
+                            name="correo"
+                            class="w-full bg-transparent focus:outline-none text-sm placeholder:text-charcoal/40"
+                            placeholder="Correo electrónico"
+                        >
+
+                    </div>
+
+                    <p
+                        id="error-correo"
+                        class="hidden text-ember-600 text-xs mt-1.5 px-4"
+                    ></p>
+
+                </div>
+
+
+                <!-- CONTRASEÑA -->
+
+                <div>
+
+                    <div class="flex items-center gap-3 bg-ivory rounded-full px-4 py-3">
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="w-full bg-transparent focus:outline-none text-sm placeholder:text-charcoal/40"
+                            placeholder="Contraseña"
+                        >
+
+                    </div>
+
+                    <p
+                        id="error-password"
+                        class="hidden text-ember-600 text-xs mt-1.5 px-4"
+                    ></p>
+
+                </div>
+
+
+                <!-- CONFIRMAR CONTRASEÑA -->
+
+                <div>
+
+                    <div class="flex items-center gap-3 bg-ivory rounded-full px-4 py-3">
+
+                        <input
+                            type="password"
+                            id="password2"
+                            name="password2"
+                            class="w-full bg-transparent focus:outline-none text-sm placeholder:text-charcoal/40"
+                            placeholder="Confirmar contraseña"
+                        >
+
+                    </div>
+
+                    <p
+                        id="error-password2"
+                        class="hidden text-ember-600 text-xs mt-1.5 px-4"
+                    ></p>
+
+                </div>
+
+
+                <!-- MENSAJE DE ÉXITO -->
+
+                <div
+                    id="exito-registro"
+                    class="hidden text-center text-sage text-sm font-medium pt-1"
+                >
+
+                    ✅ Cuenta creada con éxito.
+
+                </div>
+
+
+                <!-- BOTÓN -->
+
+                <button
+                    type="submit"
+                    class="w-full bg-ember hover:bg-ember-600 transition text-ivory text-sm font-semibold tracking-wide rounded-full py-3 mt-2"
+                >
+
+                    CREAR CUENTA
+
+                </button>
+
+            </form>
+
+
+            <!--- LOGIN --->
+
+            <p class="text-center text-ivory/60 text-xs mt-6">
+
+                ¿Ya tienes cuenta?
+
+                <a
+                    href="login.html"
+                    class="text-brass-400 hover:text-brass"
+                >
+                    Inicia sesión
+                </a>
+
+            </p>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- JavaScript del registro -->
+    <script src="JS/registro.js"></script>
+
+</body>
+
+</html>
