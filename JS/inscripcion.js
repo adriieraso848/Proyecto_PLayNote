@@ -37,9 +37,15 @@ function revisarCampos() {
     campo.addEventListener("input", revisarCampos);
 });
 
-inscribirse.addEventListener("click", function() {
+inscribirse.addEventListener("click", async () => {
+
     if (!nombre.value || !apellido.value || !codigo.value || !correo.value) {
-        alert("Completa todos los campos");
+        await Swal.fire({
+            title: "Campos vacíos",
+            text: "Completa todos los campos",
+            icon: "warning",
+            confirmButtonText: "Aceptar"
+        });
         return;
     }
 
@@ -54,7 +60,13 @@ inscribirse.addEventListener("click", function() {
     });
 
     localStorage.setItem("inscripciones", JSON.stringify(inscripciones));
-    alert("Inscripción realizada");
+
+    await Swal.fire({
+        title: "¡Éxito!",
+        text: "Inscripción realizada correctamente",
+        icon: "success",
+        confirmButtonText: "Aceptar"
+    });
 
     mensajeExito.classList.remove("hidden");
 
@@ -67,4 +79,4 @@ inscribirse.addEventListener("click", function() {
     mostrarInscripciones();
 });
 
-verInscripciones.addEventListener("click", mostrarInscripciones);s
+verInscripciones.addEventListener("click", mostrarInscripciones);
