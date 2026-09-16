@@ -1,191 +1,70 @@
-// ================================
-// SISTEMA DE INSCRIPCIONES
-// ================================
+let nombre = document.getElementById("nombre");
+let apellido = document.getElementById("apellido");
+let codigo = document.getElementById("codigo");
+let correo = document.getElementById("correo");
+let curso = document.getElementById("curso");
 
-// Obtener elementos del HTML
-const nombre = document.getElementById("nombre");
-const apellido = document.getElementById("apellido");
-const codigo = document.getElementById("codigo");
-const correo = document.getElementById("correo");
-const curso = document.getElementById("curso");
-
-const botonInscribirse = document.getElementById("inscribirse");
-const botonVerInscripciones = document.getElementById("verInscripciones");
-const listaInscripciones = document.getElementById("listaInscripciones");
-
-
-// ================================
-// OBTENER INSCRIPCIONES
-// ================================
+let inscribirse = document.getElementById("inscribirse");
+let verInscripciones = document.getElementById("verInscripciones");
+let lista = document.getElementById("listaInscripciones");
+let mensajeExito = document.getElementById("mensajeExito");
 
 function obtenerInscripciones() {
-
-    const datos = localStorage.getItem("inscripciones");
-
-    if (datos) {
-        return JSON.parse(datos);
-    }
-
-    return [];
+    return JSON.parse(localStorage.getItem("inscripciones")) || [];
 }
 
+function mostrarInscripciones() {
+    let inscripciones = obtenerInscripciones();
+    lista.innerHTML = inscripciones.length ? "" : "<p>No hay inscripciones.</p>";
 
-// ================================
-// GUARDAR INSCRIPCIONES
-// ================================
-
-function guardarInscripciones(inscripciones) {
-
-    localStorage.setItem(
-        "inscripciones",
-        JSON.stringify(inscripciones)
-    );
+    inscripciones.forEach(i => {
+        let tarjeta = document.createElement("div");
+        tarjeta.innerHTML = `
+            <p>Estudiante: ${i.nombre} ${i.apellido}</p>
+            <p>Código: ${i.codigo}</p>
+            <p>Correo: ${i.correo}</p>
+            <p>Curso: ${i.curso}</p>
+        `;
+        lista.appendChild(tarjeta);
+    });
 }
 
+function revisarCampos() {
+    inscribirse.disabled = !(nombre.value && apellido.value && codigo.value && correo.value);
+}
 
-// ================================
-// REGISTRAR INSCRIPCIÓN
-// ================================
+[nombre, apellido, codigo, correo].forEach(campo => {
+    campo.addEventListener("input", revisarCampos);
+});
 
-botonInscribirse.addEventListener("click", function () {
-
-    // Validar campos
-    if (
-        nombre.value.trim() === "" ||
-        apellido.value.trim() === "" ||
-        codigo.value.trim() === "" ||
-        correo.value.trim() === ""
-    ) {
-        alert("Por favor, completa todos los campos.");
+inscribirse.addEventListener("click", function() {
+    if (!nombre.value || !apellido.value || !codigo.value || !correo.value) {
+        alert("Completa todos los campos");
         return;
     }
 
+    let inscripciones = obtenerInscripciones();
 
-    // Obtener las inscripciones existentes
-    const inscripciones = obtenerInscripciones();
-
-
-    // Crear nueva inscripción
-    const nuevaInscripcion = {
-
-        nombre: nombre.value.trim(),
-
-        apellido: apellido.value.trim(),
-
-        codigo: codigo.value.trim(),
-
-        correo: correo.value.trim(),
-
+    inscripciones.push({
+        nombre: nombre.value,
+        apellido: apellido.value,
+        codigo: codigo.value,
+        correo: correo.value,
         curso: curso.value
-    };
+    });
 
+    localStorage.setItem("inscripciones", JSON.stringify(inscripciones));
+    alert("Inscripción realizada");
 
-    // Agregar inscripción al arreglo
-    inscripciones.push(nuevaInscripcion);
+    mensajeExito.classList.remove("hidden");
 
-
-    // Guardar en localStorage
-    guardarInscripciones(inscripciones);
-
-
-    // Mostrar mensaje
-    alert("¡Inscripción realizada con éxito!");
-
-
-    // Limpiar los campos
     nombre.value = "";
     apellido.value = "";
     codigo.value = "";
     correo.value = "";
 
-
-    // Mostrar las inscripciones actualizadas
+    revisarCampos();
     mostrarInscripciones();
-
 });
 
-
-// ================================
-// MOSTRAR INSCRIPCIONES
-// ================================
-
-function mostrarInscripciones() {
-
-    // Limpiar el contenido anterior
-    listaInscripciones.innerHTML = "";
-
-
-    // Obtener datos de localStorage
-    const inscripciones = obtenerInscripciones();
-
-
-    // Si no existen inscripciones
-    if (inscripciones.length === 0) {
-
-        listaInscripciones.innerHTML =
-            "<p class='text-gray-300'>No hay inscripciones registradas.</p>";
-
-        return;
-    }
-
-
-    // Título
-    const titulo = document.createElement("h3");
-
-    titulo.textContent = "Mis inscripciones";
-
-    titulo.className =
-        "text-2xl font-bold text-white mb-4";
-
-
-    listaInscripciones.appendChild(titulo);
-
-
-    // Recorrer las inscripciones
-    inscripciones.forEach(function (inscripcion, indice) {
-
-        // Crear tarjeta
-        const tarjeta = document.createElement("div");
-
-
-        tarjeta.className =
-            "bg-slate-700 rounded-xl p-5 mb-4 text-white";
-
-
-        // Crear contenido
-        tarjeta.innerHTML = `
-            <p><strong>Estudiante:</strong> 
-                ${inscripcion.nombre} ${inscripcion.apellido}
-            </p>
-
-            <p><strong>Código:</strong> 
-                ${inscripcion.codigo}
-            </p>
-
-            <p><strong>Correo:</strong> 
-                ${inscripcion.correo}
-            </p>
-
-            <p><strong>Curso:</strong> 
-                ${inscripcion.curso}
-            </p>
-        `;
-
-
-        // Agregar tarjeta al contenedor
-        listaInscripciones.appendChild(tarjeta);
-
-    });
-
-}
-
-
-// ================================
-// BOTÓN VER INSCRIPCIONES
-// ================================
-
-botonVerInscripciones.addEventListener("click", function () {
-
-    mostrarInscripciones();
-
-});
+verInscripciones.addEventListener("click", mostrarInscripciones);s
