@@ -98,7 +98,6 @@ const CURSOS = [
     mio: false
   }
 ];
-
 let filtro = "all";
 function mostrarCursos(lista) {
   const grid = document.getElementById("grid");
@@ -108,22 +107,17 @@ function mostrarCursos(lista) {
       <article
         data-idx="${i}"
         class="curso-card group relative h-[360px] cursor-pointer overflow-hidden rounded-[20px] bg-brand-card transition-transform duration-300 hover:-translate-y-2">
-
         <img
           src="${lista[i].imagen}"
           alt="${lista[i].nombre}"
           class="h-full w-full object-cover">
-
         <div class="absolute inset-x-[22px] bottom-5 text-white">
-
           <h3 class="mb-1.5 font-serif text-[1.24rem] font-semibold leading-[1.28]">
             ${lista[i].nombre}
           </h3>
-
           <p class="mb-2.5 text-[0.78rem] text-white/60">
             Por ${lista[i].instructor}
           </p>
-
           <div class="flex gap-3.5 text-[0.74rem] text-white/55">
             <span>${lista[i].horas} horas</span>
             <span>${lista[i].lecciones} lecciones</span>
@@ -132,7 +126,6 @@ function mostrarCursos(lista) {
       </article>
     `;
   }
-
   const tarjetas = document.querySelectorAll(".curso-card");
   for (let i = 0; i < tarjetas.length; i++) {
     tarjetas[i].addEventListener("click", function() {
@@ -145,7 +138,6 @@ function mostrarCursos(lista) {
     });
   }
 }
-
 document.getElementById("filters").addEventListener("click", function(event) {
   const boton = event.target.closest(".filter-btn");
   if (!boton) {
@@ -201,7 +193,6 @@ document.getElementById("search").addEventListener("input", function() {
     mostrarCursos(resultado);
   }
 });
-
 function mostrarAlerta() {
   Swal.fire({
     icon: "error",
@@ -210,7 +201,6 @@ function mostrarAlerta() {
     confirmButtonText: "Reintentar"
   });
 }
-
 function resetFilters() {
   filtro = "all";
   document.getElementById("search").value = "";
