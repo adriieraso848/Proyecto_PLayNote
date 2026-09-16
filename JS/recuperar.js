@@ -1,21 +1,41 @@
-function restablecerContraseña() {
+let botonRestablecer = document.querySelector("#btnRestablecer");
+
+botonRestablecer.addEventListener("click", async ()=> {
 
     let nuevaContraseña = document.getElementById("nuevaContraseña").value;
     let confirmarContraseña = document.getElementById("confirmarContraseña").value;
 
     if (nuevaContraseña == "" || confirmarContraseña == "") {
-        console.log("Completa todos los campos");
+        await Swal.fire({
+            title: "Campos vacíos",
+            text: "Completa todos los campos",
+            icon: "warning",
+            confirmButtonText: "Aceptar"
+        });
     }
+
     else if (nuevaContraseña != confirmarContraseña) {
-        console.log("Las contraseñas no coinciden");
+        await Swal.fire({
+            title: "Error",
+            text: "Las contraseñas no coinciden",
+            icon: "error",
+            confirmButtonText: "Aceptar"
+        });
     }
+
     else {
 
         let usuarios = JSON.parse(localStorage.getItem("usuarios"));
 
         if (usuarios == null) {
-            console.log("No hay usuarios registrados");
+            await Swal.fire({
+                title: "Error",
+                text: "No hay usuarios registrados",
+                icon: "error",
+                confirmButtonText: "Aceptar"
+            });
         }
+
         else {
 
             let correo = prompt("Escribe el correo de tu cuenta");
@@ -30,18 +50,29 @@ function restablecerContraseña() {
             }
 
             if (usuarioEncontrado == null) {
-                console.log("El correo no está registrado");
+                await Swal.fire({
+                    title: "Correo no encontrado",
+                    text: "El correo no está registrado",
+                    icon: "error",
+                    confirmButtonText: "Aceptar"
+                });
             }
+
             else {
 
                 usuarioEncontrado.contraseña = nuevaContraseña;
 
                 localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-                console.log("Contraseña restablecida correctamente");
+                await Swal.fire({
+                    title: "¡Éxito!",
+                    text: "Contraseña restablecida correctamente",
+                    icon: "success",
+                    confirmButtonText: "Aceptar"
+                });
 
                 window.location.href = "login.html";
             }
         }
     }
-}
+});
