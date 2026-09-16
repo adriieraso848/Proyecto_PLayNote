@@ -21,7 +21,11 @@ function registrarUsuario() {
 
     if (nombre == "") {
 
-        alert("Por favor ingresa tu nombre");
+        Swal.fire({
+            icon:"warning",
+            title: "Campo vacío",
+            text: "Por favor ingresa tu nombre"
+    });
 
         return;
     }
@@ -29,7 +33,11 @@ function registrarUsuario() {
 
     if (correo == "") {
 
-        alert("Por favor ingresa tu correo");
+        Swal.fire({
+            icon:"warning",
+            title: "Campo vacío",
+            text: "Por favor ingresa tu correo"
+    });
 
         return;
     }
@@ -37,7 +45,11 @@ function registrarUsuario() {
 
     if (contraseña == "") {
 
-        alert("Por favor ingresa una contraseña");
+        Swal.fire({
+            icon:"warning",
+            title: "Campo vacío",
+            text: "Por favor ingresa una contraseña"
+    });
 
         return;
     }
@@ -45,7 +57,11 @@ function registrarUsuario() {
 
     if (contraseña2 == "") {
 
-        alert("Por favor confirma tu contraseña");
+        Swal.fire({
+            icon: "warning",
+            title: "Campo vacío",
+            text: "Por favor confirma tu contraseña"
+        })
 
         return;
     }
@@ -53,7 +69,11 @@ function registrarUsuario() {
 
     if (contraseña != contraseña2) {
 
-        alert("Las contraseñas no coinciden");
+        Swal.fire({
+            icon:"error",
+            title: "error",
+            text: "Las contraseñas no coinciden"
+        })
 
         return;
     }
@@ -74,7 +94,11 @@ function registrarUsuario() {
 
     if (correoExiste == true) {
 
-        alert("Este correo ya está registrado");
+        Swal.fire({
+            icon:"error",
+            title: "Correo ya registrado",
+            text: "Este correo ya está registrado"
+        })
 
         return;
     }
@@ -93,12 +117,17 @@ function registrarUsuario() {
 
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-    alert("Usuario registrado correctamente");
-
+    Swal.fire({
+            icon:"success",
+            title: "!Registro exitoso¡",
+            text: "Usuario registrado correctamente",
+            confirmButtonText: "Continuar"
+        }).then (() => {
 
     formulario.reset();
 
 
     window.location.href = "login.html";
+    });
 
 }
