@@ -107,7 +107,7 @@ const GLOWS = [
   "radial-gradient(circle at 55% 14%,rgba(61,139,255,.32),transparent 55%),linear-gradient(165deg,#1B3A5F,#0A1B2E)",
 ];
 
-let active = "all", query = "", errorOn = false;
+let active = "all", query = "", errorOn = true;
 
 function card(c, i) {
   return `
@@ -149,9 +149,7 @@ function card(c, i) {
           <span>${c.horas} horas</span>
           <span>${c.lecciones} lecciones</span>
         </div>
-
       </div>
-
     </article>
   `;
 }
@@ -203,6 +201,19 @@ document.getElementById("filters").addEventListener("click", e => {
   render();
 });
 document.getElementById("search").addEventListener("input", e => { query = e.target.value.toLowerCase(); render(); });
-function setError(v){ errorOn = (v===undefined) ? !errorOn : v; render(); }
+function setError(v){
+  errorOn = (v===undefined) ?!errorOn:v;
+  render();
+  if(errorOn){
+    Swal.fire({
+      icon:"error",
+      title:"No se pudo cargar el catalogo",
+      text:"La informacionrecibida no tiene ningun dato valido",
+      confirmButtonText:"Reintentar"
+    }).then(()=>{
+      setError(false);
+    })
+  }
+}
 function resetFilters(){ active="all"; query=""; document.getElementById("search").value=""; document.querySelector('[data-filter="all"]').click(); }
-render();
+setError(true);
