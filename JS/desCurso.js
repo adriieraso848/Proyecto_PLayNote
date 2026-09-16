@@ -1,7 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
   const datosGuardados = localStorage.getItem("cursoSeleccionado");
 
-  if (!datosGuardados) return;
+  if (!datosGuardados){
+    Swal.fire({
+      icon:"warning",
+      title:"No hay curso seleccionado",
+      text:"Vuelve al catalogo y elige un curso primero",
+      confirmButtonText:"Ir al catalogo"
+    }).then(()=>{
+      window.location.href="pagCursos.html";
+    });
+    return;
+  }
 
   const curso = JSON.parse(datosGuardados);
 
