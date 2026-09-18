@@ -38,10 +38,32 @@ botonRestablecer.addEventListener("click", async ()=> {
 
         else {
 
-            let correo = prompt("Escribe el correo de tu cuenta");
+            // Muestra una alerta personalizada para solicitar el correo del usuario
+            // y detiene el proceso si el usuario pulsa “Cancelar”.
+            let resultado = await Swal.fire({
+                title: "Restablecer contraseña",
+                text: "Escribe el correo de tu cuenta",
+                input: "email",
+                inputPlaceholder: "correo@ejemplo.com",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Continuar",
+                cancelButtonText: "Cancelar"
+            });
+
+            if (!resultado.isConfirmed) {
+                return;
+            }
+
+            let correo = resultado.value;
+
+
+
+
 
             let usuarioEncontrado = null;
 
+            // Recorre todos los usuarios para buscar uno con el correo indicado
             for (let i = 0; i < usuarios.length; i++) {
 
                 if (usuarios[i].correo == correo) {
@@ -60,8 +82,10 @@ botonRestablecer.addEventListener("click", async ()=> {
 
             else {
 
+                // Cambia la contraseña del usuario encontrado
                 usuarioEncontrado.contraseña = nuevaContraseña;
 
+                // Guarda la lista actualizada de usuarios en localStorage
                 localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
                 await Swal.fire({
@@ -70,7 +94,8 @@ botonRestablecer.addEventListener("click", async ()=> {
                     icon: "success",
                     confirmButtonText: "Aceptar"
                 });
-
+                
+                // Envía al usuario a la página de inicio de sesión
                 window.location.href = "login.html";
             }
         }
